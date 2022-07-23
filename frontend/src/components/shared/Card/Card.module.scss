@@ -1,0 +1,28 @@
+.card {
+    width: 500px;
+    max-width: 100%;
+    min-height: 350px;
+    height: 100%;
+    background: #1d1d1d;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+
+    .headingWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+
+        > img {
+            height: 25px;
+            width: 25px;
+        }
+
+        .heading {
+            font-size: 1.6em;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+    }
+}

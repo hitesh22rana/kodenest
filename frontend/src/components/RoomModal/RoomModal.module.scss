@@ -1,0 +1,114 @@
+.modalMask {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+
+    .modalBody {
+        margin-top: 100px;
+        height: 430px;
+        width: 100%;
+        min-width: 420px;
+        max-width: 500px;
+        background: #1d1d1d;
+        border-radius: 20px;
+        position: relative;
+
+        @media (max-width: 756px) {
+            width: auto;
+            margin-top: 200px;
+        }
+
+        .closeButton {
+            cursor: pointer;
+            position: absolute;
+            right: 5px;
+            top: 10px;
+            background: none;
+            border: none;
+
+            > img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        .modalHeader {
+            padding: 30px;
+            border-bottom: 2px solid #262626;
+
+            .heading {
+                margin-bottom: 5px;
+            }
+
+            .subHeading {
+                font-size: 18px;
+                margin: 10px 0;
+                font-weight: bold;
+            }
+
+            .roomTypes {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+
+                .typeBox {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 10px 0px;
+                    border-radius: 10px;
+                    cursor: pointer;
+
+                    > img {
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+
+                .typeBox.active {
+                    background: #262626;
+                }
+            }
+        }
+
+        .modalFooter {
+            padding: 30px;
+            text-align: center;
+
+            > h2 {
+                margin-bottom: 20px;
+                font-weight: bold;
+                font-size: 20px;
+            }
+        }
+
+        .footerButton {
+            cursor: pointer;
+            background: #20bd5f;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            width: 200px;
+            justify-content: center;
+            padding: 7px 10px;
+            border-radius: 20px;
+            border: none;
+            margin: 0 auto;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background: #13763b;
+            }
+
+            > span {
+                margin-left: 5px;
+                font-weight: bold;
+            }
+        }
+    }
+}

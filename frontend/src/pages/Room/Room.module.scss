@@ -1,0 +1,140 @@
+.container {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 10px 15px;
+    margin: 0px auto;
+
+    > button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: none;
+        outline: none;
+        margin-top: 2rem;
+        border: none;
+
+        > img {
+            height: 14px;
+            width: 14px;
+        }
+
+        > span {
+            position: relative;
+            margin-left: 0.5rem;
+            font-weight: 600;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        > span::after {
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: #0077ff;
+            border-radius: 10px;
+        }
+    }
+}
+
+.clientsWrap {
+    background: #1d1d1d;
+    margin-top: 4rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    min-height: calc(100vh - 221px);
+    height: auto;
+    min-width: 600px;
+    padding: 2rem;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .topic {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+
+            button {
+                background: #262626;
+                outline: none;
+                margin-left: 2rem;
+                display: flex;
+                align-items: center;
+                padding: 0.7rem 1rem;
+                border-radius: 20px;
+                color: #fff;
+                transition: all 0.3s ease-in-out;
+                cursor: pointer;
+                border: none;
+
+                &:hover {
+                    background: #333333;
+                }
+
+                span {
+                    font-weight: 600;
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+
+    .clientsList {
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+
+        .client {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            > h4 {
+                font-weight: bold;
+                margin-top: 1rem;
+            }
+
+            .userHead {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                border: 3px solid #5453e0;
+                position: relative;
+
+                .userAvatar {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+
+                .micBtn {
+                    cursor: pointer;
+                    background: #293241;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 18px;
+                    height: 18px;
+                    box-sizing: content-box;
+                    border-radius: 100%;
+                    border: none;
+                    padding: 2px;
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+    }
+}

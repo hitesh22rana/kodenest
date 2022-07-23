@@ -1,0 +1,140 @@
+// Colors
+$primary: #fff;
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    min-width: 600px;
+    margin-top: 20px;
+
+    > nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        width: 100%;
+        padding: 20px;
+        height: 60px;
+
+        > a {
+            display: flex;
+            flex-direction: row;
+            color: $primary;
+            font-weight: 700;
+            font-size: 1.2em;
+
+            > img {
+                width: 32px;
+                height: 28px;
+            }
+
+            > span {
+                margin: auto 10px;
+                font-size: 1.2em;
+            }
+        }
+
+        .navRight {
+            display: flex;
+            flex-direction: row;
+
+            .navUser {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: auto 10px auto 0px;
+
+                > a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: auto 10px auto 0px;
+
+                    > img {
+                        border: 2px solid #3a86ff;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        width: 40px;
+                        height: 38px;
+                    }
+                }
+            }
+
+            .button {
+                cursor: pointer;
+                position: relative;
+                display: inline-block;
+                padding: 2px 7px;
+                color: $primary;
+                text-decoration: none;
+                font-weight: 500;
+                overflow: hidden;
+                filter: hue-rotate(0deg);
+                border: 2px solid #3a86ff;
+                background: #3a86ff;
+                border-radius: 100%;
+                margin: auto 2px auto 10px;
+                transition: all 0.2s ease-in-out;
+
+                .logoutIcon {
+                    color: #121212;
+                    height: 37px;
+                    width: 32px;
+                    transition: all 0.2s ease-in-out;
+                }
+
+                &:hover {
+                    background: none;
+
+                    .logoutIcon {
+                        color: #3a86ff;
+                    }
+                }
+            }
+
+            .autheticate__buttons {
+                cursor: pointer;
+
+                button {
+                    border: 2px solid rgba(255, 255, 255, 0.25);
+                    cursor: pointer;
+                    padding: 8px 30px;
+                    margin: auto 10px;
+                    border-radius: 7px;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 1em;
+                    outline: none;
+                    transition: all 0.5s ease-in-out;
+                }
+            }
+
+            .autheticate__buttons:nth-child(1) {
+                button {
+                    background: none;
+
+                    &:hover {
+                        background: rgba(46, 5, 118, 0.2);
+                    }
+                }
+            }
+
+            .autheticate__buttons:last-child {
+                button {
+                    border: 2px solid #7724cc;
+                    background: #7724cc;
+
+                    &:hover {
+                        background: #7724cc80;
+                        border: 2px solid #7724cc80;
+                    }
+                }
+            }
+        }
+    }
+}

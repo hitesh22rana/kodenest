@@ -1,0 +1,96 @@
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+    min-width: 600px;
+    width: 100%;
+
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        max-width: 1200px;
+        width: 100%;
+        padding: 10px 30px;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 768px) {
+            justify-content: center;
+        }
+
+        .leftWrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            max-height: 300px;
+            min-width: 420px;
+            width: 50%;
+
+            > h1 {
+                font-size: 2.4em;
+                font-weight: bold;
+                margin-bottom: 30px;
+            }
+
+            .text {
+                max-width: 460px;
+                font-size: 1.2em;
+                text-align: left;
+                line-height: 25px;
+                word-spacing: 3px;
+                margin-bottom: 50px;
+            }
+
+            @media (max-width: 1000px) {
+                width: 55%;
+                > h1 {
+                    font-size: 2em;
+                }
+
+                .text {
+                    font-size: 1em;
+                }
+            }
+
+            @media (max-width: 768px) {
+                justify-content: space-around;
+                align-items: center;
+                width: 50%;
+
+                > h1 {
+                    margin-bottom: 20px;
+                }
+
+                .text {
+                    max-width: 400px;
+                    text-align: center;
+                    line-height: 22px;
+                    word-spacing: 2px;
+                    margin-bottom: 30px;
+                }
+
+                div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+            }
+        }
+
+        .rightWrapper {
+            width: 40%;
+
+            > img {
+                object-fit: cover;
+                border-radius: 10px;
+                filter: brightness(120%);
+                filter: contrast(120%);
+            }
+
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+}
