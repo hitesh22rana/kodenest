@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 
 import Loading from "./components/shared/Loading/Loading";
-import Navigation from "./components/shared/Navigation/Navigation";
 
 import Home from "./pages/Home/Home";
 import Authenticate from "./pages/Authenticate/Authenticate";
@@ -29,7 +28,6 @@ function App() {
         <Loading />
     ) : (
         <Router>
-            <Navigation />
             <Routes>
                 <Route
                     path="/"
