@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import styles from "../StepPhoneEmail.module.scss";
 import validator from "validator";
 
-import Card from "../../../../components/shared/Card/Card";
-import Button from "../../../../components/shared/Button/Button";
-import TextInput from "../../../../components/shared/TextInput/TextInput";
 import Alerts from "../../../../components/shared/Alerts/Alerts";
 
 import { sendOtp } from "../../../../http";
@@ -12,14 +9,18 @@ import { useDispatch } from "react-redux";
 import { setOtp } from "../../../../store/authSlice";
 
 const Email = ({ onNext }) => {
+    const dispatch = useDispatch();
     const [userDetails, setUserDetails] = useState({
         email: "",
         password: "",
         confirmPassword: "",
     });
-    const dispatch = useDispatch();
     const [isAlert, setIsAlert] = useState(false);
     const [alertmessage, setAlertMessage] = useState("");
+    const [visible, setVisible] = useState({
+        passwordVisible: false,
+        confirmPasswordVisible: false,
+    });
 
     const onChange = (event) => {
         setUserDetails({
@@ -29,8 +30,12 @@ const Email = ({ onNext }) => {
     };
 
     async function submit() {
-        if (!userDetails?.email) {
-            setAlertMessage("Enter a valid email!");
+        if (
+            !userDetails?.email ||
+            !userDetails?.password ||
+            !userDetails?.confirmPassword
+        ) {
+            setAlertMessage("All fields are required!");
             setIsAlert(true);
             return;
         }
@@ -41,14 +46,8 @@ const Email = ({ onNext }) => {
             return;
         }
 
-        if (!userDetails?.password || !userDetails?.confirmPassword) {
-            setAlertMessage("Enter a valid password!");
-            setIsAlert(true);
-            return;
-        }
-
         if (userDetails?.password !== userDetails?.confirmPassword) {
-            setAlertMessage("Password doesn't match with Confirm Password!");
+            setAlertMessage("Enter a valid password!");
             setIsAlert(true);
             return;
         }
@@ -68,6 +67,11 @@ const Email = ({ onNext }) => {
             );
             onNext();
         } catch (err) {
+            setUserDetails({
+                email: "",
+                password: "",
+                confirmPassword: "",
+            });
             setAlertMessage(err?.response?.data?.message);
             setIsAlert(true);
             return;
@@ -83,38 +87,108 @@ const Email = ({ onNext }) => {
                     setIsAlert={setIsAlert}
                 />
             )}
-            <Card title="Enter your Email Address" icon="mail-white">
-                <TextInput
-                    fullwidth={"false"}
-                    type="email"
-                    name="email"
-                    value={userDetails?.email}
-                    onChange={onChange}
-                />
-                <TextInput
-                    fullwidth={"false"}
-                    type="password"
-                    name="password"
-                    value={userDetails?.password}
-                    onChange={onChange}
-                />
-                <TextInput
-                    fullwidth={"false"}
-                    type="password"
-                    name="confirmPassword"
-                    value={userDetails?.confirmPassword}
-                    onChange={onChange}
-                />
-                <div>
-                    <div className={styles.actionButtonWrap}>
-                        <Button text="Next" onClick={submit} />
+
+            <div className={styles.formWrapper}>
+                <h2>Sign Up</h2>
+                <h4>Create your account and let the fun begin!</h4>
+
+                <div className={styles.inputWrapper}>
+                    <div>
+                        <img src="/images/formMail.png" alt="mail" />
+                        <input
+                            type="email"
+                            name="email"
+                            value={userDetails?.email}
+                            onChange={onChange}
+                            placeholder="Enter email"
+                        />
                     </div>
-                    <p className={styles.bottomParagraph}>
-                        By entering your number, you’re agreeing to our Terms of
-                        Service and Privacy Policy. Thanks!
-                    </p>
+
+                    <div>
+                        <img src="/images/formPassword.png" alt="mail" />
+                        {visible?.passwordVisible ? (
+                            <img
+                                className={styles.passwordImgVisible}
+                                src="/images/visible.png"
+                                alt="visible"
+                                onClick={() =>
+                                    setVisible({
+                                        ...visible,
+                                        passwordVisible:
+                                            !visible?.passwordVisible,
+                                    })
+                                }
+                            />
+                        ) : (
+                            <img
+                                className={styles.passwordImgHidden}
+                                src="/images/hide.png"
+                                alt="hidden"
+                                onClick={() =>
+                                    setVisible({
+                                        ...visible,
+                                        passwordVisible:
+                                            !visible?.passwordVisible,
+                                    })
+                                }
+                            />
+                        )}
+                        <input
+                            type={
+                                visible?.passwordVisible ? "text" : "password"
+                            }
+                            name="password"
+                            value={userDetails?.password}
+                            onChange={onChange}
+                            placeholder="Enter password"
+                        />
+                    </div>
+
+                    <div>
+                        <img src="/images/formConfirmPassword.png" alt="mail" />
+                        {visible?.confirmPasswordVisible ? (
+                            <img
+                                className={styles.passwordImgVisible}
+                                src="/images/visible.png"
+                                alt="visible"
+                                onClick={() =>
+                                    setVisible({
+                                        ...visible,
+                                        confirmPasswordVisible:
+                                            !visible?.confirmPasswordVisible,
+                                    })
+                                }
+                            />
+                        ) : (
+                            <img
+                                className={styles.passwordImgHidden}
+                                src="/images/hide.png"
+                                alt="hidden"
+                                onClick={() =>
+                                    setVisible({
+                                        ...visible,
+                                        confirmPasswordVisible:
+                                            !visible?.confirmPasswordVisible,
+                                    })
+                                }
+                            />
+                        )}
+                        <input
+                            type={
+                                visible?.confirmPasswordVisible
+                                    ? "text"
+                                    : "password"
+                            }
+                            name="confirmPassword"
+                            value={userDetails?.confirmPassword}
+                            onChange={onChange}
+                            placeholder="Confirm password"
+                        />
+                    </div>
+
+                    <button onClick={submit}>Sign Up</button>
                 </div>
-            </Card>
+            </div>
         </>
     );
 };
