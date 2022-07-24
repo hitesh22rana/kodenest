@@ -4,7 +4,7 @@
     max-width: 1200px;
     width: 100%;
     padding: 10px 15px;
-    margin: 0px auto;
+    margin: -10px auto 0px auto;
 
     > button {
         cursor: pointer;
@@ -48,7 +48,7 @@
     border-top-left-radius: 10px;
     min-height: calc(100vh - 221px);
     height: auto;
-    min-width: 600px;
+    min-width: 500px;
     padding: 2rem;
 
     .header {

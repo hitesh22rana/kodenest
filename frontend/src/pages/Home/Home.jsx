@@ -3,7 +3,6 @@ import styles from "./Home.module.scss";
 import { useNavigate } from "react-router-dom";
 
 import Navigation from "../../components/shared/Navigation/Navigation";
-import Button from "../../components/shared/Button/Button";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -26,7 +25,10 @@ const Home = () => {
                             breaks.
                         </p>
                         <div>
-                            <Button onClick={startRegister} text="Let's Go" />
+                            <button onClick={startRegister}>
+                                <span>Let's Go</span>
+                                <span>👉</span>
+                            </button>
                         </div>
                     </div>
                     <div className={styles.rightWrapper}>

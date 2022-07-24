@@ -8,9 +8,9 @@ $primary: #fff;
     height: auto;
     justify-content: center;
     align-items: center;
-    min-width: 600px;
+    min-width: 500px;
 
-    > nav {
+    .navBar {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -18,7 +18,8 @@ $primary: #fff;
         max-width: 1200px;
         width: 100%;
         padding: 20px;
-        height: 60px;
+        height: 40px;
+        margin-bottom: 15px;
 
         > a {
             display: flex;
@@ -41,6 +42,10 @@ $primary: #fff;
         .navRight {
             display: flex;
             flex-direction: row;
+
+            @media (max-width: 600px) {
+                display: none;
+            }
 
             .navUser {
                 display: flex;

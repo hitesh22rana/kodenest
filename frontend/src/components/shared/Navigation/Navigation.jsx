@@ -14,14 +14,12 @@ const Navigation = () => {
         try {
             const { data } = await logout();
             dispatch(setAuth(data));
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     }
 
     return (
         <div className={styles.wrapper}>
-            <nav>
+            <nav className={styles.navBar}>
                 <Link to="/">
                     <img src="/images/logo.png" alt="logo" />
                     <span>KodeNest</span>
@@ -30,7 +28,7 @@ const Navigation = () => {
                     {isAuth ? (
                         <>
                             <div className={styles.navUser}>
-                                <Link to="/">
+                                <Link to="/rooms">
                                     <img
                                         src={
                                             user.avatar

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../StepPhoneEmail.module.scss";
 import validator from "validator";
 
 import Alerts from "../../../../components/shared/Alerts/Alerts";
+import Card from "../../../../components/shared/Card/Card";
+import Button from "../../../../components/shared/Button/Button";
 
 import { sendOtp } from "../../../../http";
 import { useDispatch } from "react-redux";
@@ -88,10 +91,10 @@ const Email = ({ onNext }) => {
                 />
             )}
 
-            <div className={styles.formWrapper}>
-                <h2>Sign Up</h2>
-                <h4>Create your account and let the fun begin!</h4>
-
+            <Card
+                title="Sign Up"
+                subtitle="Create your account and let the fun begin!"
+            >
                 <div className={styles.inputWrapper}>
                     <div>
                         <img src="/images/formMail.png" alt="mail" />
@@ -185,9 +188,12 @@ const Email = ({ onNext }) => {
                             placeholder="Confirm password"
                         />
                     </div>
-
-                    <button onClick={submit}>Sign Up</button>
+                    <Button onClick={submit} text="Sign Up" />
                 </div>
+            </Card>
+            <div className={styles.bottomLink}>
+                <span>Already have an account?</span>
+                <Link to="/login">Log in</Link>
             </div>
         </>
     );

@@ -1,28 +1,27 @@
-.card {
-    width: 500px;
-    max-width: 100%;
-    min-height: 350px;
-    height: 100%;
-    background: #1d1d1d;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 500px;
+    height: auto;
+    max-width: 450px;
+    min-width: 380px;
+    background: linear-gradient(
+        217deg,
+        rgba(255, 255, 255, 0.1452) 0%,
+        rgba(255, 255, 255, 0.0825) 100.74%
+    );
+    border-radius: 10px;
+    padding: 15px 40px;
+    margin: 0px auto 5px auto;
 
-    .headingWrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 30px;
+    h2 {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
 
-        > img {
-            height: 25px;
-            width: 25px;
-        }
-
-        .heading {
-            font-size: 1.6em;
-            font-weight: 500;
-            margin-left: 10px;
-        }
+    span {
+        font-size: 0.7em;
+        font-weight: lighter;
     }
 }

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getRoom } from "../../http";
 import styles from "./Room.module.scss";
+import Navigation from "../../components/shared/Navigation/Navigation";
 
 const Room = () => {
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Room = () => {
 
     return (
         <>
+            <Navigation />
             <div className={styles.container}>
                 <button onClick={handManualLeave}>
                     <img src="/images/arrow-left.png" alt="arrow-left" />

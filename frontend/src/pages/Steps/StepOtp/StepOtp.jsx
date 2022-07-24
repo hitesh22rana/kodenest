@@ -47,8 +47,9 @@ const StepOtp = () => {
             )}
             <div className={styles.cardWrapper}>
                 <Card
-                    title="Enter the code we just texted you"
-                    icon="lock-emoji"
+                    title="Enter OTP"
+                    subtitle="A six-digit verification code has been sent to you email.
+                    Please check it."
                 >
                     <TextInput
                         value={otp}

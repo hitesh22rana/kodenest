@@ -1,114 +1,78 @@
-.cardWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2.5rem;
-    min-width: 600px;
-}
-
-.formWrapper {
+.inputWrapper {
     display: flex;
     flex-direction: column;
+    margin: 25px auto 20px auto;
     width: 100%;
-    max-height: 500px;
-    height: auto;
-    max-width: 450px;
-    min-width: 380px;
-    background: linear-gradient(
-        217deg,
-        rgba(255, 255, 255, 0.1452) 0%,
-        rgba(255, 255, 255, 0.0825) 100.74%
-    );
-    backdrop-filter: blur(20px);
-    border-radius: 10px;
-    padding: 15px 40px;
-    margin: 40px auto;
 
-    h2 {
-        font-size: 1.5em;
-        font-weight: 600;
+    div {
+        width: 100%;
+        position: relative;
+
+        img {
+            position: absolute;
+            width: 20px;
+            height: 18px;
+            top: 35%;
+            left: 4%;
+        }
+
+        .passwordImgHidden,
+        .passwordImgVisible {
+            cursor: pointer;
+            position: absolute;
+            left: auto;
+        }
+
+        .passwordImgHidden {
+            width: 18px;
+            height: 16px;
+            top: 35%;
+            right: 4%;
+        }
+
+        .passwordImgVisible {
+            width: 18px;
+            height: 14px;
+            top: 37%;
+            right: 4%;
+        }
+
+        input {
+            border: 2px solid #d5d3d9;
+            padding: 15px 20px 15px 45px;
+            width: 100%;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 5px;
+            outline: none;
+            background: none;
+            margin: 12px auto;
+            font-weight: 500;
+
+            &:focus {
+                border: 2px solid #7724cc;
+            }
+        }
     }
+}
 
-    h4 {
-        font-size: 0.7em;
+.bottomLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 20px auto 10px auto;
+
+    span {
+        font-size: 0.9em;
         font-weight: 400;
     }
 
-    .inputWrapper {
-        display: flex;
-        flex-direction: column;
-        margin: 25px auto 20px auto;
-        width: 100%;
-
-        div {
-            width: 100%;
-            position: relative;
-
-            img {
-                position: absolute;
-                width: 20px;
-                height: 18px;
-                top: 35%;
-                left: 4%;
-            }
-
-            .passwordImgHidden,
-            .passwordImgVisible {
-                cursor: pointer;
-                position: absolute;
-                left: auto;
-            }
-
-            .passwordImgHidden {
-                width: 18px;
-                height: 16px;
-                top: 35%;
-                right: 4%;
-            }
-
-            .passwordImgVisible {
-                width: 18px;
-                height: 14px;
-                top: 37%;
-                right: 4%;
-            }
-
-            input {
-                border: 2px solid #d5d3d9;
-                padding: 15px 20px 15px 45px;
-                width: 100%;
-                color: #fff;
-                font-size: 12px;
-                border-radius: 5px;
-                outline: none;
-                background: none;
-                margin: 12px auto;
-                font-weight: 500;
-
-                &:focus {
-                    border: 2px solid #7724cc;
-                }
-            }
-        }
-
-        button {
-            cursor: pointer;
-            width: 100%;
-            height: 50px;
-            border: none;
-            outline: none;
-            background: rgba(119, 36, 204, 1);
-            font-size: 1em;
-            color: #fff;
-            border-radius: 5px;
-            transition: all 0.5s ease-in-out;
-            border: 2px solid #7724cc;
-            margin-top: 30px;
-
-            &:hover {
-                background: #7724cc80;
-                border: 2px solid #7724cc80;
-            }
-        }
+    > a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9em;
+        margin: 0px 10px;
+        color: rgba(119, 36, 204, 1);
     }
 }

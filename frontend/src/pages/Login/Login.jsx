@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
+import validator from "validator";
 
 import BackNavigation from "../../components/shared/BackNavigation/BackNavigation";
 import Alerts from "../../components/shared/Alerts/Alerts";
+import Card from "../../components/shared/Card/Card";
+import Button from "../../components/shared/Button/Button";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../http/index";
@@ -25,6 +29,18 @@ const Login = () => {
     };
 
     async function submit() {
+        if (!userDetails?.email || !userDetails?.password) {
+            setIsAlert(true);
+            return;
+        }
+
+        if (!validator.isEmail(userDetails?.email)) {
+            setIsAlert(true);
+            return;
+        }
+
+        setIsAlert(false);
+
         try {
             setIsAlert(false);
             const { data } = await login({
@@ -46,11 +62,10 @@ const Login = () => {
                     setIsAlert={setIsAlert}
                 />
             )}
-            <BackNavigation />
-            <div className={styles.formWrapper}>
-                <h2>Log in</h2>
-                <h4>Login to manage your account</h4>
 
+            <BackNavigation />
+
+            <Card title="Log in" subtitle="Login to manage your account">
                 <div className={styles.inputWrapper}>
                     <div>
                         <img src="/images/formMail.png" alt="mail" />
@@ -88,8 +103,12 @@ const Login = () => {
                             placeholder="Enter password"
                         />
                     </div>
-                    <button onClick={submit}>Log in</button>
+                    <Button onClick={submit} text="Log in" />
                 </div>
+            </Card>
+            <div className={styles.bottomLink}>
+                <span>Don't have an account?</span>
+                <Link to="/authenticate">Sign Up</Link>
             </div>
         </>
     );

@@ -1,13 +1,11 @@
 import React from "react";
 import styles from "./Card.module.scss";
 
-const Card = ({ title, icon, children }) => {
+const Card = ({ title, subtitle, children }) => {
     return (
-        <div className={styles.card}>
-            <div className={styles.headingWrapper}>
-                <img src={`/images/${icon}.png`} alt="logo" />
-                <h1 className={styles.heading}>{title}</h1>
-            </div>
+        <div className={styles.formWrapper}>
+            <h2>{title}</h2>
+            <span>{subtitle}</span>
             {children}
         </div>
     );
