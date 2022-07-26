@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../StepPhoneEmail.module.scss";
+import { useDispatch } from "react-redux";
 import validator from "validator";
 
 import Alerts from "../../../../components/shared/Alerts/Alerts";
@@ -8,7 +9,6 @@ import Card from "../../../../components/shared/Card/Card";
 import Button from "../../../../components/shared/Button/Button";
 
 import { sendOtp } from "../../../../http";
-import { useDispatch } from "react-redux";
 import { setOtp } from "../../../../store/authSlice";
 
 const Email = ({ onNext }) => {

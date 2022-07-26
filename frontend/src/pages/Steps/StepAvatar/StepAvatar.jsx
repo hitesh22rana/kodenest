@@ -11,7 +11,7 @@ import Loading from "../../../components/shared/Loading/Loading";
 const StepAvatar = ({ onNext }) => {
     const dispatch = useDispatch();
     const { name, avatar } = useSelector((state) => state.activate);
-    const [image, setImage] = useState("/images/monkey-avatar.png");
+    const [image, setImage] = useState("/images/defaultAvatar.png");
     const [isLoading, setIsLoading] = useState(false);
     const [mounted, setMounted] = useState(false);
 
@@ -55,8 +55,10 @@ const StepAvatar = ({ onNext }) => {
     if (isLoading) return <Loading />;
     return (
         <>
-            <Card title={`Hello, ${name}`} icon="monkey-emoji">
-                <p className={styles.subHeading}>How’s this photo?</p>
+            <Card
+                title={`Hello, ${name} 👻`}
+                subtitle="Let’s choose your avatar"
+            >
                 <div className={styles.avatarWrapper}>
                     <img
                         className={styles.avatarImage}
@@ -64,10 +66,7 @@ const StepAvatar = ({ onNext }) => {
                         alt="avatar"
                     />
                 </div>
-                <p className={styles.headAfterAvtar}>
-                    Don’t worry you can change this photo anytime!
-                </p>
-                <div>
+                <div className={styles.labelContainer}>
                     <input
                         onChange={captureImage}
                         id="avatarInput"
@@ -75,8 +74,9 @@ const StepAvatar = ({ onNext }) => {
                         className={styles.avatarInput}
                         accept=".jpg, .jpeg, .png"
                     />
+                    <span>Didn’t like this avatar?</span>
                     <label className={styles.avatarLabel} htmlFor="avatarInput">
-                        Choose a different photo
+                        Choose other
                     </label>
                 </div>
                 <div className={styles.actionButtonWrap}>

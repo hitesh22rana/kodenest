@@ -3,7 +3,6 @@ import styles from "./StepName.module.scss";
 
 import Card from "../../../components/shared/Card/Card";
 import Button from "../../../components/shared/Button/Button";
-import TextInput from "../../../components/shared/TextInput/TextInput";
 import Alerts from "../../../components/shared/Alerts/Alerts";
 
 import { useDispatch } from "react-redux";
@@ -44,18 +43,29 @@ const StepName = ({ onNext }) => {
                     setIsAlert={setIsAlert}
                 />
             )}
-            <Card title="What should we call you?" icon="goggle-emoji">
-                <TextInput
-                    value={fullname}
-                    onChange={(e) => setFullname(e.target.value)}
-                />
-                <p className={styles.paragraph}>
-                    We use real names at codershouse :) !
-                </p>
-                <div className={styles.actionButtonWrap}>
-                    <Button onClick={nextStep} text="Next" />
-                </div>
-            </Card>
+
+            <div className={styles.cardWrapper}>
+                <Card
+                    title="What should we call you? 🤓"
+                    subtitle="We use real names at KodeNest!"
+                >
+                    <div className={styles.inputWrapper}>
+                        <div>
+                            <img src="/images/Usericon.png" alt="user" />
+                            <input
+                                type="email"
+                                name="email"
+                                value={fullname}
+                                onChange={(e) => setFullname(e.target.value)}
+                                placeholder="Enter name"
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.actionButtonWrap}>
+                        <Button onClick={nextStep} text="Next" />
+                    </div>
+                </Card>
+            </div>
         </>
     );
 };

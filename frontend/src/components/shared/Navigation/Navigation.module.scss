@@ -60,7 +60,7 @@ $primary: #fff;
                     margin: auto 10px auto 0px;
 
                     > img {
-                        border: 2px solid #3a86ff;
+                        border: 2px solid rgba(119, 36, 204, 1);
                         object-fit: cover;
                         border-radius: 50%;
                         width: 40px;
@@ -79,8 +79,8 @@ $primary: #fff;
                 font-weight: 500;
                 overflow: hidden;
                 filter: hue-rotate(0deg);
-                border: 2px solid #3a86ff;
-                background: #3a86ff;
+                border: 2px solid rgba(119, 36, 204, 1);
+                background: rgba(119, 36, 204, 1);
                 border-radius: 100%;
                 margin: auto 2px auto 10px;
                 transition: all 0.2s ease-in-out;
@@ -96,7 +96,7 @@ $primary: #fff;
                     background: none;
 
                     .logoutIcon {
-                        color: #3a86ff;
+                        color: rgba(119, 36, 204, 1);
                     }
                 }
             }

@@ -1,15 +1,46 @@
 import React, { useState } from "react";
 import styles from "./StepOtp.module.scss";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import OTPInput, { ResendOTP } from "otp-input-react";
 
+import BackNavigation from "../../../components/shared/BackNavigation/BackNavigation";
 import Card from "../../../components/shared/Card/Card";
-import TextInput from "../../../components/shared/TextInput/TextInput";
 import Button from "../../../components/shared/Button/Button";
 import Alerts from "../../../components/shared/Alerts/Alerts";
 
 import { verifyOtp } from "../../../http";
-import { useSelector } from "react-redux";
-import { setAuth } from "../../../store/authSlice";
-import { useDispatch } from "react-redux";
+import { setAuth, setOtp as setOtpRedux } from "../../../store/authSlice";
+import { sendOtp } from "../../../http";
+
+// Resend button
+const renderButton = (buttonProps) => {
+    return (
+        <>
+            {buttonProps.remainingTime !== 0 ? (
+                <span
+                    style={{ cursor: "disabled" }}
+                    className={styles.resendtext}
+                >
+                    Haven’t received OTP? Resend OTP in{" "}
+                    <span>{buttonProps?.remainingTime}</span> seconds
+                </span>
+            ) : (
+                <span className={styles.resendtext}>
+                    Didn’t receive OTP?
+                    <span
+                        onClick={buttonProps.onClick}
+                        style={{ cursor: "pointer" }}
+                    >
+                        Resend OTP
+                    </span>
+                </span>
+            )}
+        </>
+    );
+};
+
+const renderTime = () => React.Fragment;
 
 const StepOtp = () => {
     const [otp, setOtp] = useState("");
@@ -31,8 +62,28 @@ const StepOtp = () => {
             dispatch(setAuth(data));
         } catch (err) {
             setOtp("");
-            setAlertMessage("Invalid OTP!");
+            setAlertMessage(err?.response?.data?.message);
             setIsAlert(true);
+        }
+    }
+
+    async function resendOTP() {
+        setIsAlert(false);
+        try {
+            const { data } = await sendOtp({
+                email: email,
+            });
+            dispatch(
+                setOtpRedux({
+                    email: data?.email,
+                    password: password,
+                    hash: data?.hash,
+                })
+            );
+        } catch (err) {
+            setAlertMessage(err?.response?.data?.message);
+            setIsAlert(true);
+            return;
         }
     }
 
@@ -45,24 +96,54 @@ const StepOtp = () => {
                     setIsAlert={setIsAlert}
                 />
             )}
+            <BackNavigation />
             <div className={styles.cardWrapper}>
                 <Card
                     title="Enter OTP"
-                    subtitle="A six-digit verification code has been sent to you email.
-                    Please check it."
+                    subtitle="A six-digit verification code has been sent to you email."
                 >
-                    <TextInput
-                        value={otp}
-                        onChange={(e) => setOtp(e.target.value)}
-                    />
-                    <div className={styles.actionButtonWrap}>
-                        <Button onClick={submit} text="Next" />
+                    <span style={{ fontWeight: "lighter", fontSize: "0.7em" }}>
+                        Please check it.
+                    </span>
+                    <div className={styles.otpInputContainer}>
+                        <OTPInput
+                            value={otp}
+                            onChange={setOtp}
+                            autoFocus={true}
+                            OTPLength={6}
+                            otpType="number"
+                            disabled={false}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                padding: "5px",
+                                marginTop: "50px",
+                            }}
+                            inputStyles={{
+                                width: "43px",
+                                height: "43px",
+                                outline: "none",
+                                borderRadius: "4px",
+                                background: "none",
+                                color: "#fff",
+                                fontWeight: "600",
+                                fontSize: "1em",
+                            }}
+                            inputClassName={styles.otpInputValue}
+                        />
                     </div>
-                    <p className={styles.bottomParagraph}>
-                        By entering your number, you’re agreeing to our Terms of
-                        Service and Privacy Policy. Thanks!
-                    </p>
+                    <div className={styles.actionButtonWrap}>
+                        <Button onClick={submit} text="Verify" />
+                    </div>
                 </Card>
+                <ResendOTP
+                    className={styles.resendButton}
+                    maxTime={120}
+                    onResendClick={resendOTP}
+                    renderButton={renderButton}
+                    renderTime={renderTime}
+                />
             </div>
         </>
     );
