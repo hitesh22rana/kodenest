@@ -150,7 +150,7 @@ class AuthController {
     }
 
     async login(req, res) {
-        const { email, password } = req.body;
+        const { email, password, toRemember } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({ message: "All fields are required!" });
@@ -174,12 +174,14 @@ class AuthController {
                     activated: false
                 });
 
-                await tokenService.storeRefreshToken(refreshToken, user._id);
+                if (toRemember) {
+                    await tokenService.storeRefreshToken(refreshToken, user._id);
 
-                res.cookie('refreshToken', refreshToken, {
-                    maxAge: 1000 * 60 * 60 * 24 * 30,
-                    httpOnly: true,
-                });
+                    res.cookie('refreshToken', refreshToken, {
+                        maxAge: 1000 * 60 * 60 * 24 * 30,
+                        httpOnly: true,
+                    });
+                }
 
                 res.cookie('accessToken', accessToken, {
                     maxAge: 1000 * 60 * 60 * 24 * 30,
@@ -194,12 +196,14 @@ class AuthController {
                     activated: true
                 });
 
-                await tokenService.storeRefreshToken(refreshToken, user._id);
+                if (toRemember) {
+                    await tokenService.storeRefreshToken(refreshToken, user._id);
 
-                res.cookie('refreshToken', refreshToken, {
-                    maxAge: 1000 * 60 * 60 * 24 * 30,
-                    httpOnly: true,
-                });
+                    res.cookie('refreshToken', refreshToken, {
+                        maxAge: 1000 * 60 * 60 * 24 * 30,
+                        httpOnly: true,
+                    });
+                }
 
                 res.cookie('accessToken', accessToken, {
                     maxAge: 1000 * 60 * 60 * 24 * 30,
@@ -209,6 +213,7 @@ class AuthController {
                 const userDto = new UserDto(user);
                 return res.status(201).json({ user: userDto, auth: true });
             }
+
 
         } catch (err) {
             console.log(err);
