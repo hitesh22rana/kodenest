@@ -11,7 +11,7 @@
         img {
             position: absolute;
             width: 20px;
-            height: 18px;
+            height: 20px;
             top: 35%;
             left: 4%;
         }
@@ -26,14 +26,14 @@
         .passwordImgHidden {
             width: 18px;
             height: 16px;
-            top: 35%;
+            top: 38%;
             right: 4%;
         }
 
         .passwordImgVisible {
             width: 18px;
             height: 14px;
-            top: 37%;
+            top: 39%;
             right: 4%;
         }
 
@@ -52,6 +52,30 @@
             &:focus {
                 border: 2px solid #7724cc;
             }
+        }
+    }
+
+    .checkBox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .check {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 12px;
+            width: 13px;
+            background: #7724cc;
+            border-radius: 2px;
+        }
+
+        span {
+            margin: auto 5px;
+            font-weight: lighter;
+            font-size: 0.6em;
         }
     }
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import validator from "validator";
+import DoneIcon from "@mui/icons-material/Done";
 
 import BackNavigation from "../../components/shared/BackNavigation/BackNavigation";
 import Alerts from "../../components/shared/Alerts/Alerts";
@@ -20,6 +21,7 @@ const Login = () => {
     });
     const [isAlert, setIsAlert] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [checked, setChecked] = useState(true);
 
     const onChange = (event) => {
         setUserDetails({
@@ -46,6 +48,7 @@ const Login = () => {
             const { data } = await login({
                 email: userDetails?.email,
                 password: userDetails?.password,
+                toRemember: checked,
             });
             dispatch(setAuth(data));
         } catch (err) {
@@ -102,6 +105,26 @@ const Login = () => {
                             onChange={onChange}
                             placeholder="Enter password"
                         />
+                    </div>
+                    <div className={styles.checkBox}>
+                        <div
+                            className={styles.check}
+                            style={!checked ? { backgroundColor: "#fff" } : {}}
+                            onClick={() => setChecked(!checked)}
+                        >
+                            {checked && (
+                                <DoneIcon
+                                    sx={{
+                                        height: "10px",
+                                        width: "10px",
+                                        position: "absolute",
+                                        top: "1px",
+                                        left: "2px",
+                                    }}
+                                />
+                            )}
+                        </div>
+                        <span>Remember me</span>
                     </div>
                     <Button onClick={submit} text="Log in" />
                 </div>
