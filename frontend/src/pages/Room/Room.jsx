@@ -11,10 +11,7 @@ const Room = () => {
     const user = useSelector((state) => state.auth.user);
     const { id: roomId } = useParams();
     const [room, setRoom] = useState(null);
-    const { clients, provideRef, handleMute, localStream } = useWebRTC(
-        roomId,
-        user
-    );
+    const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
     const [isMuted, setMuted] = useState(true);
 
     useEffect(() => {
