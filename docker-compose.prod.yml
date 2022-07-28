@@ -7,7 +7,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - /var/databases/mongodb/codershouse-data:/data/db
+      - /var/databases/mongodb/kodenest-data:/data/db
   backend:
     build:
       dockerfile: Dockerfile.prod
