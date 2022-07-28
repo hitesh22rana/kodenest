@@ -4,11 +4,12 @@
     align-items: center;
     justify-content: center;
     margin-top: 2.5rem;
-    min-width: 500px;
+    min-width: 350px;
+    padding: 10px;
 
     .otpInputContainer {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
 
         .otpInputValue {

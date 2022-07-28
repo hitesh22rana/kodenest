@@ -3,6 +3,9 @@
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
+    min-width: 210px;
+    max-width: 280px;
+    width: 100%;
 
     .speakers {
         display: flex;

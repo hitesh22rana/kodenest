@@ -118,11 +118,15 @@ const StepOtp = () => {
                                 alignItems: "center",
                                 justifyContent: "space-between",
                                 padding: "5px",
-                                marginTop: "50px",
+                                marginTop: "40px",
                             }}
                             inputStyles={{
-                                width: "43px",
-                                height: "43px",
+                                maxWidth: "43px",
+                                minWidth: "30px",
+                                minHeight: "40px",
+                                maxHeight: "32px",
+                                width: "100%",
+                                height: "100%",
                                 outline: "none",
                                 borderRadius: "4px",
                                 background: "none",

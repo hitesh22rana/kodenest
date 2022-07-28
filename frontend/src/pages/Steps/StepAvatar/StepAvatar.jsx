@@ -54,7 +54,7 @@ const StepAvatar = ({ onNext }) => {
 
     if (isLoading) return <Loading />;
     return (
-        <>
+        <div className={styles.cardWrapper}>
             <Card
                 title={`Hello, ${name} 👻`}
                 subtitle="Let’s choose your avatar"
@@ -83,7 +83,7 @@ const StepAvatar = ({ onNext }) => {
                     <Button onClick={submit} text="Next" />
                 </div>
             </Card>
-        </>
+        </div>
     );
 };
 

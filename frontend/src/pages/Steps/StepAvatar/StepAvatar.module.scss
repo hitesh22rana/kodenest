@@ -1,19 +1,30 @@
-.avatarWrapper {
+.cardWrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    width: 110px;
-    height: 110px;
-    border: 2px solid rgba(119, 36, 204, 1);
-    border-radius: 50%;
-    margin: 0px auto;
-    margin-top: 20px;
+    margin-top: 2.5rem;
+    min-width: 350px;
+    width: 100%;
+    padding: 10px;
 
-    .avatarImage {
-        height: 90%;
-        width: 90%;
-        object-fit: cover;
+    .avatarWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        width: 110px;
+        height: 110px;
+        border: 2px solid rgba(119, 36, 204, 1);
+        border-radius: 50%;
+        margin: 0px auto;
+        margin-top: 20px;
+
+        .avatarImage {
+            height: 90%;
+            width: 90%;
+            object-fit: cover;
+        }
     }
 }
 

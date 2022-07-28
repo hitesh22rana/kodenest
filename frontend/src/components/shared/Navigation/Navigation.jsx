@@ -26,7 +26,7 @@ const Navigation = () => {
                 </Link>
                 <div className={styles.navRight}>
                     {isAuth ? (
-                        <>
+                        <div className={styles.navRoom}>
                             <div className={styles.navUser}>
                                 <Link to="/rooms">
                                     <img
@@ -45,9 +45,9 @@ const Navigation = () => {
                             >
                                 <LogoutIcon className={styles.logoutIcon} />
                             </button>
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div className={styles.navOutside}>
                             <Link
                                 className={styles.autheticate__buttons}
                                 to="/authenticate"
@@ -60,7 +60,7 @@ const Navigation = () => {
                             >
                                 <button>Log in</button>
                             </Link>
-                        </>
+                        </div>
                     )}
                 </div>
             </nav>

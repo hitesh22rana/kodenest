@@ -68,70 +68,74 @@ const Login = () => {
 
             <BackNavigation />
 
-            <Card title="Log in" subtitle="Login to manage your account">
-                <div className={styles.inputWrapper}>
-                    <div>
-                        <img src="/images/formMail.png" alt="mail" />
-                        <input
-                            type="email"
-                            name="email"
-                            value={userDetails?.email}
-                            onChange={onChange}
-                            placeholder="Enter email"
-                        />
-                    </div>
+            <div className={styles.cardWrapper}>
+                <Card title="Log in" subtitle="Login to manage your account">
+                    <div className={styles.inputWrapper}>
+                        <div>
+                            <img src="/images/formMail.png" alt="mail" />
+                            <input
+                                type="email"
+                                name="email"
+                                value={userDetails?.email}
+                                onChange={onChange}
+                                placeholder="Enter email"
+                            />
+                        </div>
 
-                    <div>
-                        <img src="/images/formPassword.png" alt="mail" />
-                        {visible ? (
-                            <img
-                                className={styles.passwordImgVisible}
-                                src="/images/visible.png"
-                                alt="visible"
-                                onClick={() => setVisible(!visible)}
-                            />
-                        ) : (
-                            <img
-                                className={styles.passwordImgHidden}
-                                src="/images/hide.png"
-                                alt="hidden"
-                                onClick={() => setVisible(!visible)}
-                            />
-                        )}
-                        <input
-                            type={visible ? "text" : "password"}
-                            name="password"
-                            value={userDetails?.password}
-                            onChange={onChange}
-                            placeholder="Enter password"
-                        />
-                    </div>
-                    <div className={styles.checkBox}>
-                        <div
-                            className={styles.check}
-                            style={!checked ? { backgroundColor: "#fff" } : {}}
-                            onClick={() => setChecked(!checked)}
-                        >
-                            {checked && (
-                                <DoneIcon
-                                    sx={{
-                                        height: "10px",
-                                        width: "10px",
-                                        position: "absolute",
-                                        top: "1px",
-                                        left: "2px",
-                                    }}
+                        <div>
+                            <img src="/images/formPassword.png" alt="mail" />
+                            {visible ? (
+                                <img
+                                    className={styles.passwordImgVisible}
+                                    src="/images/visible.png"
+                                    alt="visible"
+                                    onClick={() => setVisible(!visible)}
+                                />
+                            ) : (
+                                <img
+                                    className={styles.passwordImgHidden}
+                                    src="/images/hide.png"
+                                    alt="hidden"
+                                    onClick={() => setVisible(!visible)}
                                 />
                             )}
+                            <input
+                                type={visible ? "text" : "password"}
+                                name="password"
+                                value={userDetails?.password}
+                                onChange={onChange}
+                                placeholder="Enter password"
+                            />
                         </div>
-                        <span>Remember me</span>
+                        <div className={styles.checkBox}>
+                            <div
+                                className={styles.check}
+                                style={
+                                    !checked ? { backgroundColor: "#fff" } : {}
+                                }
+                                onClick={() => setChecked(!checked)}
+                            >
+                                {checked && (
+                                    <DoneIcon
+                                        sx={{
+                                            height: "10px",
+                                            width: "10px",
+                                            position: "absolute",
+                                            top: "1px",
+                                            left: "2px",
+                                        }}
+                                    />
+                                )}
+                            </div>
+                            <span>Remember me</span>
+                        </div>
+                        <Button onClick={submit} text="Log in" />
                     </div>
-                    <Button onClick={submit} text="Log in" />
+                </Card>
+                <div className={styles.bottomLink}>
+                    <span>Don't have an account?</span>
+                    <Link to="/authenticate">Sign Up</Link>
                 </div>
-            </Card>
-            <div className={styles.bottomLink}>
-                <span>Don't have an account?</span>
-                <Link to="/authenticate">Sign Up</Link>
             </div>
         </>
     );

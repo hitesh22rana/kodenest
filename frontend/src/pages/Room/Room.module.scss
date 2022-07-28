@@ -46,13 +46,14 @@
     margin-top: 4rem;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    min-height: calc(100vh - 221px);
+    min-height: calc(100vh - 218px);
     height: auto;
-    min-width: 500px;
+    min-width: 350px;
     padding: 2rem;
 
     .header {
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: space-between;
 
@@ -63,6 +64,7 @@
 
         .actions {
             display: flex;
+            flex-direction: row;
             align-items: center;
 
             button {
@@ -86,6 +88,22 @@
                     font-weight: 600;
                     margin-left: 1rem;
                 }
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        padding: 1rem;
+
+        .header {
+            flex-direction: column;
+
+            .topic {
+                font-size: 22px;
+            }
+
+            .actions {
+                margin: 20px auto 0px auto;
             }
         }
     }

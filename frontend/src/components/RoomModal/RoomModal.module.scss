@@ -7,20 +7,25 @@
     background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
+    padding: 10px;
 
     .modalBody {
         margin-top: 100px;
-        height: 430px;
+        height: 420px;
         width: 100%;
-        min-width: 420px;
+        min-width: 320px;
         max-width: 500px;
         background: #1d1d1d;
-        border-radius: 20px;
+        border-radius: 10px;
         position: relative;
 
         @media (max-width: 756px) {
             width: auto;
             margin-top: 200px;
+        }
+
+        @media (max-width: 576px) {
+            margin-top: 100px;
         }
 
         .closeButton {

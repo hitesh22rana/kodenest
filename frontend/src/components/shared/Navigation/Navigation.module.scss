@@ -8,7 +8,7 @@ $primary: #fff;
     height: auto;
     justify-content: center;
     align-items: center;
-    min-width: 500px;
+    min-width: 350px;
 
     .navBar {
         display: flex;
@@ -44,7 +44,23 @@ $primary: #fff;
             flex-direction: row;
 
             @media (max-width: 600px) {
-                display: none;
+                .navRoom:last-child() {
+                    display: none;
+                }
+            }
+
+            .navRoom {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .navOutside {
+                display: flex;
+                flex-direction: row;
+
+                @media (max-width: 600px) {
+                    display: none;
+                }
             }
 
             .navUser {
@@ -90,6 +106,16 @@ $primary: #fff;
                     height: 37px;
                     width: 32px;
                     transition: all 0.2s ease-in-out;
+                }
+
+                @media (max-width: 600px) {
+                    padding: 1px 6px;
+                    margin: auto 2px auto 6px;
+
+                    .logoutIcon {
+                        height: 30px;
+                        width: 25px;
+                    }
                 }
 
                 &:hover {

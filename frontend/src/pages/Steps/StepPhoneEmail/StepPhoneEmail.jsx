@@ -6,8 +6,8 @@ import Email from "./Email/Email";
 const StepPhoneEmail = ({ onNext }) => {
     return (
         <>
+            <BackNavigation />
             <div className={styles.cardWrapper}>
-                <BackNavigation />
                 <Email onNext={onNext} />
             </div>
         </>
