@@ -1,0 +1,79 @@
+.modalMask {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    z-index: 999;
+
+    .modalBody {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 100px;
+        height: 180px;
+        width: 100%;
+        min-width: 320px;
+        max-width: 500px;
+        background: #1d1d1d;
+        position: relative;
+        padding: 20px 30px;
+        border-radius: 2px;
+
+        > h2 {
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+
+        span {
+            font-size: 0.9em;
+            font-weight: 400;
+            margin-top: -20px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+
+            button {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 20px;
+                margin: auto 4px;
+                outline: none;
+                border: none;
+                border-radius: 2px;
+                font-size: 0.9em;
+                font-weight: normal;
+                transition: 0.5s all ease-in-out;
+            }
+
+            button:nth-child(1) {
+                background: rgba(29, 29, 29, 0.8);
+                color: #20bd5f;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+
+                &:hover {
+                    background: rgba(45, 56, 62, 0.2);
+                }
+            }
+
+            button:last-child {
+                background: #20bd5f;
+                color: #fff;
+
+                &:hover {
+                    background: #13763b;
+                }
+            }
+        }
+    }
+}

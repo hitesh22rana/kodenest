@@ -53,8 +53,8 @@ const StepName = ({ onNext }) => {
                         <div>
                             <img src="/images/Usericon.png" alt="user" />
                             <input
-                                type="email"
-                                name="email"
+                                type="text"
+                                name="name"
                                 value={fullname}
                                 onChange={(e) => setFullname(e.target.value)}
                                 placeholder="Enter name"

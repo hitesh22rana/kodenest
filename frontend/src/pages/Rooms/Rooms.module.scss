@@ -53,14 +53,15 @@
                 .heading::after {
                     content: "";
                     position: absolute;
-                    bottom: -10px;
+                    bottom: -8px;
                     left: 0;
                     width: 60%;
                     height: 4px;
                     background: rgba(119, 36, 204, 1);
 
                     @media (max-width: 756px) {
-                        width: 100%;
+                        height: 3px;
+                        bottom: -5px;
                     }
                 }
 
@@ -81,14 +82,15 @@
                         color: #fff;
                         width: 100%;
                     }
+
+                    @media (max-width: 576px) {
+                        min-width: 180px;
+                        margin-left: 0px;
+                    }
                 }
             }
 
             .right {
-                @media (max-width: 756px) {
-                    margin: 10px;
-                }
-
                 .startRoomButton {
                     cursor: pointer;
                     display: flex;
@@ -109,6 +111,10 @@
                     font-size: 16px;
                     margin-left: 10px;
                 }
+
+                @media (max-width: 756px) {
+                    margin: 7px auto;
+                }
             }
         }
     }
@@ -125,12 +131,12 @@
 
         @media (max-width: 756px) {
             grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            margin-top: 40px;
         }
 
         @media (max-width: 576px) {
             grid-template-columns: repeat(1, 1fr);
-            margin: 5px auto;
+            margin: 20px auto 10px auto;
         }
     }
 }

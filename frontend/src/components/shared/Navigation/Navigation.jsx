@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../http";
 import { setAuth } from "../../../store/authSlice";
+
+import LogoutModal from "../../LogoutModal/LogoutModal";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Navigation = () => {
     const dispatch = useDispatch();
     const { isAuth, user } = useSelector((state) => state.auth);
+    const [showModal, setShowModal] = useState(false);
+    const [showUserNavigation, setShowUserNavigation] = useState(false);
 
-    async function logoutUser() {
+    async function confirmLogout() {
         try {
             const { data } = await logout();
             dispatch(setAuth(data));
@@ -33,18 +41,66 @@ const Navigation = () => {
                                         src={
                                             user.avatar
                                                 ? user?.avatar
-                                                : "/images/monkey-avatar.png"
+                                                : "/images/defaultAvatar.png"
                                         }
                                         alt="avatar"
                                     />
                                 </Link>
                             </div>
-                            <button
-                                onClick={logoutUser}
-                                className={styles.button}
-                            >
-                                <LogoutIcon className={styles.logoutIcon} />
+                            <button className={styles.button}>
+                                {showUserNavigation ? (
+                                    <ExpandMoreIcon
+                                        onClick={() =>
+                                            setShowUserNavigation(
+                                                (prev) => !prev
+                                            )
+                                        }
+                                        className={styles.userSettingsIcon}
+                                    />
+                                ) : (
+                                    <ExpandLessIcon
+                                        onClick={() =>
+                                            setShowUserNavigation(
+                                                (prev) => !prev
+                                            )
+                                        }
+                                        className={styles.userSettingsIcon}
+                                    />
+                                )}
                             </button>
+                            {showUserNavigation && (
+                                <div className={styles.userMenu}>
+                                    <div>
+                                        <img
+                                            src={
+                                                user.avatar
+                                                    ? user?.avatar
+                                                    : "/images/defaultAvatar.png"
+                                            }
+                                            alt="avatar"
+                                        />
+                                        <span>{user?.name}</span>
+                                    </div>
+                                    <div>
+                                        <button>
+                                            <AccountCircleIcon
+                                                className={styles.userIcons}
+                                            />
+                                            My Profile
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                setShowModal((prev) => !prev)
+                                            }
+                                        >
+                                            <LogoutIcon
+                                                className={styles.userIcons}
+                                            />
+                                            Log Out
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <div className={styles.navOutside}>
@@ -64,6 +120,12 @@ const Navigation = () => {
                     )}
                 </div>
             </nav>
+            {showModal && (
+                <LogoutModal
+                    onClose={() => setShowModal((prev) => !prev)}
+                    confirmLogout={confirmLogout}
+                />
+            )}
         </div>
     );
 };

@@ -43,23 +43,67 @@ const Email = ({ onNext }) => {
             return;
         }
 
+        // Email Validation
         if (!validator.isEmail(userDetails?.email)) {
             setAlertMessage("Enter a valid email!");
             setIsAlert(true);
             return;
         }
 
+        // Password Validation
         if (userDetails?.password !== userDetails?.confirmPassword) {
             setAlertMessage("Enter a valid password!");
             setIsAlert(true);
             return;
         }
 
+        if (userDetails?.password) {
+            let password = userDetails?.password;
+
+            const uppercaseRegExp = /(?=.*?[A-Z])/;
+            const lowercaseRegExp = /(?=.*?[a-z])/;
+            const digitsRegExp = /(?=.*?[0-9])/;
+            const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+            const minLengthRegExp = /.{8,}/;
+
+            const uppercasePassword = uppercaseRegExp.test(password);
+            const lowercasePassword = lowercaseRegExp.test(password);
+            const digitsPassword = digitsRegExp.test(password);
+            const specialCharPassword = specialCharRegExp.test(password);
+            const minLengthPassword = minLengthRegExp.test(password);
+
+            let errMsg = "";
+            if (password.includes(" ")) {
+                errMsg = "Password can't contain spaces!";
+            } else if (!uppercasePassword) {
+                errMsg =
+                    "Password must contain at least one uppercase character!";
+            } else if (!lowercasePassword) {
+                errMsg =
+                    "Password must contain at least one lowercase character!";
+            } else if (!digitsPassword) {
+                errMsg = "Password must contain at least one digit!";
+            } else if (!specialCharPassword) {
+                errMsg =
+                    "Password must contain at least one special character!";
+            } else if (!minLengthPassword) {
+                errMsg = "Password must contain minumum 8 characters!";
+            } else {
+                errMsg = "";
+            }
+
+            if (errMsg) {
+                setAlertMessage(errMsg);
+                setIsAlert(true);
+                return;
+            }
+        }
+
         setIsAlert(false);
 
         try {
             const { data } = await sendOtp({
-                email: userDetails?.email,
+                email: userDetails?.email.trim(),
             });
             dispatch(
                 setOtp({
@@ -141,6 +185,7 @@ const Email = ({ onNext }) => {
                                 visible?.passwordVisible ? "text" : "password"
                             }
                             name="password"
+                            minLength={8}
                             value={userDetails?.password}
                             onChange={onChange}
                             placeholder="Enter password"
@@ -183,6 +228,7 @@ const Email = ({ onNext }) => {
                                     : "password"
                             }
                             name="confirmPassword"
+                            minLength={8}
                             value={userDetails?.confirmPassword}
                             onChange={onChange}
                             placeholder="Confirm password"
