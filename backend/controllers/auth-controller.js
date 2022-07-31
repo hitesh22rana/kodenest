@@ -164,7 +164,9 @@ class AuthController {
                 return res.status(400).json({ message: 'Invalid Credentials!' });
             }
 
-            if (!(hashService.comparePassword(password, user?.password))) {
+            const isUser = await hashService.comparePassword(password, user?.password)
+
+            if (!(isUser)) {
                 return res.status(400).json({ message: 'Invalid Credentials!' });
             }
 
