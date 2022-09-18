@@ -7,27 +7,31 @@ import styles from "./Room.module.scss";
 import Navigation from "../../components/shared/Navigation/Navigation";
 
 const Room = () => {
+    const { id: roomId } = useParams();
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
-    const { id: roomId } = useParams();
     const [room, setRoom] = useState(null);
-    const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
-    const [isMuted, setMuted] = useState(true);
 
     useEffect(() => {
         const fetchRoom = async () => {
-            const { data } = await getRoom(roomId);
-            setRoom((prev) => data);
+            try {
+                const { data } = await getRoom(roomId);
+                setRoom((prev) => data);
+            } catch (err) {
+                navigate("/rooms");
+            }
         };
         fetchRoom();
     }, [roomId]);
+
+    const [isMuted, setMuted] = useState(true);
+    const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
 
     useEffect(() => {
         handleMute(isMuted, user?.id);
     }, [isMuted]);
 
     const handleMuteClick = (clientId) => {
-        // can show alert to improve UI
         if (clientId !== user?.id) return;
         setMuted((prev) => !prev);
     };
@@ -49,9 +53,6 @@ const Room = () => {
                 <div className={styles.header}>
                     {room && <h2 className={styles.topic}>{room.topic}</h2>}
                     <div className={styles.actions}>
-                        <button>
-                            <img src="/images/palm.png" alt="palm-icon" />
-                        </button>
                         <button onClick={handManualLeave}>
                             <img src="/images/win.png" alt="win-icon" />
                             <span>Leave quietly</span>

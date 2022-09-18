@@ -22,8 +22,12 @@ class RoomService {
     }
 
     async getRoom(roomId) {
-        const room = await RoomModel.findOne({ _id: roomId });
-        return room;
+        try {
+            const room = await RoomModel.findOne({ _id: roomId });
+            return room;
+        } catch (err) {
+            return null;
+        }
     }
 }
 

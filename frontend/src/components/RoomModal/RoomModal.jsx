@@ -33,7 +33,8 @@ const RoomModal = ({ onClose }) => {
     }
 
     return (
-        <div className={styles.modalMask}>
+        <>
+            <div className={styles.modalBackDrop} onClick={onClose}></div>
             {isAlert && (
                 <Alerts
                     message={alertmessage}
@@ -96,7 +97,7 @@ const RoomModal = ({ onClose }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

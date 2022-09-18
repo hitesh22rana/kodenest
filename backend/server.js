@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
                 user,
             });
 
-            // Send myself as well that much msgs how many clients
+            // Send total count of clients to myself as well others
             socket.emit(ACTIONS.ADD_PEER, {
                 peerId: clientId,
                 createOffer: true,
@@ -125,7 +125,7 @@ io.on('connection', (socket) => {
     // On leaving the room
     socket.on(ACTIONS.LEAVE, leaveRoom);
 
-    // If any type of disconnecting evvent occours such as browser close 
+    // If any type of disconnecting event occours such as browser close 
     socket.on('disconnecting', leaveRoom);
 
 });

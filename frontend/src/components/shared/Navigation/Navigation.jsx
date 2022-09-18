@@ -25,6 +25,11 @@ const Navigation = () => {
         } catch (err) {}
     }
 
+    function logoutConfirmation() {
+        setShowModal((prev) => !prev);
+        setShowUserNavigation((prev) => !prev);
+    }
+
     return (
         <div className={styles.wrapper}>
             <nav className={styles.navBar}>
@@ -47,59 +52,62 @@ const Navigation = () => {
                                     />
                                 </Link>
                             </div>
-                            <button className={styles.button}>
+                            <button
+                                className={styles.button}
+                                onClick={() =>
+                                    setShowUserNavigation((prev) => !prev)
+                                }
+                            >
                                 {showUserNavigation ? (
                                     <ExpandMoreIcon
-                                        onClick={() =>
-                                            setShowUserNavigation(
-                                                (prev) => !prev
-                                            )
-                                        }
                                         className={styles.userSettingsIcon}
                                     />
                                 ) : (
                                     <ExpandLessIcon
-                                        onClick={() =>
-                                            setShowUserNavigation(
-                                                (prev) => !prev
-                                            )
-                                        }
                                         className={styles.userSettingsIcon}
                                     />
                                 )}
                             </button>
                             {showUserNavigation && (
-                                <div className={styles.userMenu}>
-                                    <div>
-                                        <img
-                                            src={
-                                                user.avatar
-                                                    ? user?.avatar
-                                                    : "/images/defaultAvatar.png"
-                                            }
-                                            alt="avatar"
-                                        />
-                                        <span>{user?.name}</span>
-                                    </div>
-                                    <div>
-                                        <button>
-                                            <AccountCircleIcon
-                                                className={styles.userIcons}
+                                <>
+                                    <div
+                                        className={styles.modalBackDrop}
+                                        onClick={() =>
+                                            setShowUserNavigation(
+                                                (prev) => !prev
+                                            )
+                                        }
+                                    ></div>
+                                    <div className={styles.userMenu}>
+                                        <div>
+                                            <img
+                                                src={
+                                                    user.avatar
+                                                        ? user?.avatar
+                                                        : "/images/defaultAvatar.png"
+                                                }
+                                                alt="avatar"
                                             />
-                                            My Profile
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                setShowModal((prev) => !prev)
-                                            }
-                                        >
-                                            <LogoutIcon
-                                                className={styles.userIcons}
-                                            />
-                                            Log Out
-                                        </button>
+                                            <span>{user?.name}</span>
+                                        </div>
+                                        <div>
+                                            <button>
+                                                <AccountCircleIcon
+                                                    className={styles.userIcons}
+                                                />
+                                                My Profile
+                                            </button>
+                                            <button
+                                                onClick={logoutConfirmation}
+                                            >
+                                                <LogoutIcon
+                                                    className={styles.userIcons}
+                                                />
+                                                Log Out
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                </>
                             )}
                         </div>
                     ) : (

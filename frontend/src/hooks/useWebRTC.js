@@ -208,9 +208,7 @@ export const useWebRTC = (roomId, user) => {
 
         initChat();
         return () => {
-            localMediaStream.current
-                .getTracks()
-                .forEach((track) => track.stop());
+            localMediaStream?.current?.getTracks()?.forEach((track) => track.stop());
             socket.current.emit(ACTIONS.LEAVE, { roomId });
             for (let peerId in connections.current) {
                 connections.current[peerId].close();

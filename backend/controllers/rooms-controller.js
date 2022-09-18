@@ -26,6 +26,7 @@ class RoomsController {
 
     async getRoomByID(req, res) {
         const room = await roomService.getRoom(req.params.roomId);
+        if (!room) return res.status(400).json({ message: "Inavlid RoomID!" })
         return res.status(200).json(room);
     }
 }
