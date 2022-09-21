@@ -13,6 +13,11 @@ class UserService {
         const user = await UserModel.create({ ...data, password: hashedPassword });
         return user;
     }
+
+    async findAndUpdateUser(filter, update) {
+        const user = await UserModel.findOneAndUpdate(filter, update);
+        return user;
+    }
 }
 
 module.exports = new UserService();

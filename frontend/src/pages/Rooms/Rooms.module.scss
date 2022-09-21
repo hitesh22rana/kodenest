@@ -73,6 +73,8 @@
                     padding: 0 10px;
                     min-width: 300px;
                     border-radius: 20px;
+                    box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
+                    border: 2px solid rgba(119, 36, 204, 0.5);
 
                     .searchInput {
                         background: transparent;
@@ -95,15 +97,19 @@
                     cursor: pointer;
                     display: flex;
                     align-items: center;
-                    background: #20bd5f;
+                    background: rgb(32, 189, 95);
+                    font-weight: 500;
                     padding: 5px 20px;
                     border-radius: 20px;
                     border: none;
                     color: #fff;
                     transition: all 0.3s ease-in-out;
+                    box-shadow: 5.4px 10.9px 20.9px rgb(32 189 95 / 10%);
+                    border: 2px solid rgba(32, 189, 95, 0.5);
 
                     &:hover {
-                        background: #0f6632;
+                        box-shadow: 5.4px 10.9px 20.9px rgb(15 102 50 / 10%);
+                        border: 2px solid rgba(15, 102, 50, 0.5);
                     }
                 }
 

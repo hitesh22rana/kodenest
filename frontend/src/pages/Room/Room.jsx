@@ -61,43 +61,83 @@ const Room = () => {
                 </div>
                 <div className={styles.clientsList}>
                     {clients.map((client) => {
-                        return (
-                            <div key={client.id} className={styles.client}>
-                                <div className={styles.userHead}>
-                                    <img
-                                        className={styles.userAvatar}
-                                        src={client.avatar}
-                                        alt=""
-                                    />
-                                    <audio
-                                        autoPlay
-                                        playsInline
-                                        ref={(instance) => {
-                                            provideRef(instance, client.id);
-                                        }}
-                                    />
-                                    <button
-                                        onClick={() =>
-                                            handleMuteClick(client.id)
-                                        }
-                                        className={styles.micBtn}
-                                    >
-                                        {client.muted ? (
-                                            <img
-                                                src="/images/mic-mute.png"
-                                                alt="mic"
-                                            />
-                                        ) : (
-                                            <img
-                                                src="/images/mic.png"
-                                                alt="mic"
-                                            />
-                                        )}
-                                    </button>
+                        if (user.id === client.id) {
+                            return (
+                                <div key={client.id} className={styles.client}>
+                                    <div className={styles.userHeadUser}>
+                                        <img
+                                            className={styles.userAvatar}
+                                            src={client.avatar}
+                                            alt=""
+                                        />
+                                        <audio
+                                            autoPlay
+                                            playsInline
+                                            ref={(instance) => {
+                                                provideRef(instance, client.id);
+                                            }}
+                                        />
+                                        <button
+                                            onClick={() =>
+                                                handleMuteClick(client.id)
+                                            }
+                                            className={styles.micBtnUser}
+                                        >
+                                            {client.muted ? (
+                                                <img
+                                                    src="/images/mic-mute.png"
+                                                    alt="mic"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src="/images/mic.png"
+                                                    alt="mic"
+                                                />
+                                            )}
+                                        </button>
+                                    </div>
+                                    <h4>{client.name}</h4>
                                 </div>
-                                <h4>{client.name}</h4>
-                            </div>
-                        );
+                            );
+                        } else {
+                            return (
+                                <div key={client.id} className={styles.client}>
+                                    <div className={styles.userHead}>
+                                        <img
+                                            className={styles.userAvatar}
+                                            src={client.avatar}
+                                            alt=""
+                                        />
+                                        <audio
+                                            autoPlay
+                                            playsInline
+                                            ref={(instance) => {
+                                                provideRef(instance, client.id);
+                                            }}
+                                        />
+                                        <button
+                                            onClick={() =>
+                                                handleMuteClick(client.id)
+                                            }
+                                            className={styles.micBtn}
+                                        >
+                                            {client.muted ? (
+                                                <img
+                                                    src="/images/mic-mute.png"
+                                                    alt="mic"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src="/images/mic.png"
+                                                    alt="mic"
+                                                />
+                                            )}
+                                        </button>
+                                    </div>
+                                    <h4>{client.name}</h4>
+                                </div>
+                            );
+                        }
                     })}
                 </div>
             </div>

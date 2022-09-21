@@ -7,4 +7,5 @@ export const store = configureStore({
         auth: auth,
         activate: activate
     },
+    devTools: false,
 });

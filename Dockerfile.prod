@@ -1,10 +1,14 @@
 FROM node:16 as build
 WORKDIR /frontend
-COPY ./frontend/package*.json ./
-RUN npm install
-COPY ./frontend/ ./
-RUN npm run build
 
+COPY ./frontend/package.json ./
+COPY ./frontend/yarn.lock ./
+
+RUN yarn install
+
+COPY ./frontend/ ./
+
+RUN yarn run build
 
 FROM ubuntu:18.04
 RUN apt update -y \

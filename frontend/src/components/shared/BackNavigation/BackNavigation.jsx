@@ -4,10 +4,10 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./BackNavigation.module.scss";
 
-const BackNavigation = () => {
+const BackNavigation = ({ linkTo = "/" }) => {
     return (
         <nav>
-            <Link to="/" className={styles.menu}>
+            <Link to={linkTo} className={styles.menu}>
                 <ArrowBackIcon />
                 <span>Back To Main</span>
             </Link>

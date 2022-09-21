@@ -32,7 +32,7 @@ const Rooms = () => {
     }, [search, rooms]);
 
     function openModal() {
-        setShowModal(true);
+        setShowModal((prev) => !prev);
     }
 
     return (
@@ -65,7 +65,7 @@ const Rooms = () => {
                                     src="/images/add-room-icon.png"
                                     alt="add-room"
                                 />
-                                <span>Create a room</span>
+                                <span>Create room</span>
                             </button>
                         </div>
                     </div>
@@ -75,7 +75,9 @@ const Rooms = () => {
                         ))}
                     </div>
                 </div>
-                {showModal && <RoomModal onClose={() => setShowModal(false)} />}
+                {showModal && (
+                    <RoomModal onClose={() => setShowModal((prev) => !prev)} />
+                )}
             </div>
         </>
     );

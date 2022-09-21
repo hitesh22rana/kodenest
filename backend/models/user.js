@@ -30,6 +30,10 @@ const userSchema = new Schema(
             required: false,
             default: false
         },
+        resetLink: {
+            data: String,
+            default: "",
+        },
     },
     {
         timestamps: true,

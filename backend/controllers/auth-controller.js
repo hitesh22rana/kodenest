@@ -95,7 +95,6 @@ class AuthController {
     }
 
     async refresh(req, res) {
-
         const { refreshToken: refreshTokenFromCookie } = req.cookies;
 
         let userData;
@@ -218,7 +217,6 @@ class AuthController {
 
 
         } catch (err) {
-            console.log(err);
             return res.status(400).json({ message: 'User is not registered!' });
         }
     }
@@ -231,6 +229,107 @@ class AuthController {
         res.clearCookie('refreshToken');
         res.clearCookie('accessToken');
         return res.json({ user: null, auth: false });
+    }
+
+    async forgotPassword(req, res) {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ message: 'Invalid Credentials!' });
+        }
+
+        let user;
+
+        try {
+            user = await userService.findUser({ email });
+            if (!user) {
+                return res.status(400).json({ message: 'Invalid Credentials!' });
+            }
+
+            let token;
+            try {
+                token = tokenService.generateResetPasswordToken(user._id);
+            } catch (err) {
+                return res.status(500).json({ message: "Internal Server Error!" })
+            }
+
+            const link = `${process.env.FRONT_URL}/login/reset/${token}`;
+
+            // Send OTP
+            const status = await userService.findAndUpdateUser({ email: user.email }, { resetLink: token });
+            if (!status) return res.status(400).json({ message: "Reset password link error!" });
+
+            otpService.sendResetPasswordByEmail(email, link);
+            return res.status(200).json({ message: "Activation Link sent!" });
+        } catch (err) {
+            return res.status(400).json({ message: 'User is not registered!' });
+        }
+    }
+
+    async resetPassword(req, res) {
+        // Verify JWT Token
+        const { token } = req.params;
+        if (!token) return res.status(400).json({ message: 'Invalid Token!' });
+
+        try {
+            tokenService.verifyResetPasswordToken(token);
+        } catch (err) {
+            if (err.message.toString().includes("malformed")) return res.status(400).json({ message: 'Invalid Token!' });
+            return res.status(400).json({ message: 'Session has been Exppired!' });
+        }
+
+        // User
+        let user;
+
+        try {
+            user = await userService.findUser({ resetLink: token });
+            if (!user) {
+                return res.status(400).json({ message: 'Invalid Credentials!' });
+            }
+        } catch (err) {
+            return res.status(500).json({ message: "Internal Server Error!" });
+        }
+
+        // New Password
+        const { password } = req.body;
+        const hashedPassword = await hashService.hashPassword(password);
+
+        try {
+            const status = await userService.findAndUpdateUser({ email: user?.email }, { password: hashedPassword, resetLink: "" });
+            if (!status) return res.status(400).json({ message: "Reset password link error!" });
+        } catch (err) {
+            return res.status(500).json({ message: "Internal Server Error!" });
+        }
+
+        return res.status(200).json({ message: 'Password has been Reset!' });
+    }
+
+    async verifyTokenLink(req, res) {
+        const token = req.params.token;
+
+        if (!token) return res.status(400).json({ message: 'Invalid Token!' });
+
+        try {
+            tokenService.verifyResetPasswordToken(token);
+        } catch (err) {
+            if (err.message.toString().includes("malformed")) return res.status(400).json({ message: 'Invalid Token!' });
+            return res.status(400).json({ message: 'Session has been Exppired!' });
+        }
+
+        let user;
+
+        try {
+            user = await userService.findUser({ resetLink: token });
+
+            if (!user) {
+                return res.status(400).json({ message: 'Invalid Credentials!' });
+            } else {
+                return res.status(200).json({ message: 'Reset your password now!' });
+            }
+
+        } catch (err) {
+            return res.status(500).json({ message: "Internal Server Error!" });
+        }
     }
 
 }

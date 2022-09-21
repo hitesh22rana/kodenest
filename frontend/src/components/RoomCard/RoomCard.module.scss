@@ -1,11 +1,17 @@
 .card {
+    cursor: pointer;
     background: #1d1d1d;
     padding: 20px;
     border-radius: 10px;
-    cursor: pointer;
     min-width: 210px;
     max-width: 280px;
     width: 100%;
+    box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
+    border: 2px solid rgba(119, 36, 204, 0.5);
+
+    .topic {
+        font-weight: 600;
+    }
 
     .speakers {
         display: flex;

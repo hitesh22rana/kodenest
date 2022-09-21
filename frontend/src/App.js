@@ -6,6 +6,7 @@ import Loading from "./components/shared/Loading/Loading";
 import Home from "./pages/Home/Home";
 import Authenticate from "./pages/Authenticate/Authenticate";
 import Login from "./pages/Login/Login";
+import Reset from "./pages/Login/Reset/Reset";
 import Activate from "./pages/Activate/Activate";
 import Rooms from "./pages/Rooms/Rooms";
 import Room from "./pages/Room/Room";
@@ -50,6 +51,22 @@ function App() {
                     element={
                         <GuestRoute>
                             <Login />
+                        </GuestRoute>
+                    }
+                />
+                <Route
+                    path="/login/reset"
+                    element={
+                        <GuestRoute>
+                            <Reset />
+                        </GuestRoute>
+                    }
+                />
+                <Route
+                    path="/login/reset/:token"
+                    element={
+                        <GuestRoute>
+                            <Reset />
                         </GuestRoute>
                     }
                 />

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const accessTokenSecret = process.env.JWT_ACCESS_TOKEN;
 const refreshTokenSecret = process.env.JWT_REFRESH_TOKEN;
+const resetPasswordTokenSecret = process.env.JWT_RESET_PASSWORD_TOKEN;
 const refreshModel = require('../models/refreshToken');
 
 class TokenService {
@@ -27,11 +28,11 @@ class TokenService {
         }
     }
 
-    async verifyAccessToken(token) {
+    verifyAccessToken(token) {
         return jwt.verify(token, accessTokenSecret);
     }
 
-    async verifyRefreshToken(refreshToken) {
+    verifyRefreshToken(refreshToken) {
         return jwt.verify(refreshToken, refreshTokenSecret);
     }
 
@@ -51,6 +52,14 @@ class TokenService {
 
     async removeToken(refreshToken) {
         return await refreshModel.deleteOne({ token: refreshToken });
+    }
+
+    generateResetPasswordToken(id) {
+        return jwt.sign({ id }, resetPasswordTokenSecret, { expiresIn: '30m' })
+    }
+
+    verifyResetPasswordToken(token) {
+        return jwt.verify(token, resetPasswordTokenSecret);
     }
 }
 

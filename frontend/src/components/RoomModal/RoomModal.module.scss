@@ -21,6 +21,7 @@
     border-radius: 10px;
     z-index: 999;
     margin: auto;
+    animation: modalPopUp 0.3s;
 
     @media (max-width: 756px) {
         width: 450px;
@@ -117,5 +118,11 @@
             margin-left: 5px;
             font-weight: bold;
         }
+    }
+}
+
+@keyframes modalPopUp {
+    0% {
+        transform: scale(0);
     }
 }
