@@ -17,6 +17,7 @@ const Room = () => {
             try {
                 const { data } = await getRoom(roomId);
                 setRoom((prev) => data);
+                new Audio("/sound/join.wav").play();
             } catch (err) {
                 navigate("/rooms");
             }
@@ -37,6 +38,7 @@ const Room = () => {
     };
 
     const handManualLeave = () => {
+        new Audio("/sound/leave.mp3").play();
         navigate("/rooms");
     };
 

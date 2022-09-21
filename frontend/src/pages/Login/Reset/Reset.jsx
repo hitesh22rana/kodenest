@@ -48,6 +48,8 @@ const Reset = () => {
     const [alertMessage, setAlertMessage] = useState("");
     const [severity, setSeverity] = useState("");
 
+    const [isReset, setIsReset] = useState(false);
+
     const onChange = (event) => {
         setUserDetails({
             ...userDetails,
@@ -121,10 +123,6 @@ const Reset = () => {
         }
 
         try {
-            setSeverity("");
-            setAlertMessage("");
-            setIsAlert(false);
-
             const { data } = await reset({
                 token: token,
                 password: userDetails?.password,
@@ -133,11 +131,19 @@ const Reset = () => {
             setAlertMessage(data.message);
             setSeverity("success");
             setIsAlert(true);
+
+            setTimeout(() => {
+                setIsReset((prev) => !prev);
+            }, 1000);
         } catch (err) {
             setAlertMessage(err.response.data.message);
             setSeverity("error");
             setIsAlert(true);
         }
+    }
+
+    function navigateToLoginPage() {
+        navigate("/login");
     }
 
     return (
@@ -153,75 +159,94 @@ const Reset = () => {
 
             <BackNavigation linkTo="/login" />
 
-            <div className={styles.cardWrapper}>
-                <Card
-                    title="Reset password"
-                    subtitle="Reset password to manage your account"
-                >
-                    <div className={styles.inputWrapper}>
-                        <div>
-                            <img src="/images/formPassword.png" alt="mail" />
-                            {visible.password ? (
+            {isReset ? (
+                <div className={styles.cardWrapper}>
+                    <Card
+                        title="Successful password reset!"
+                        subtitle="You can now use your new password to login to your account 🙌"
+                    >
+                        <Button onClick={navigateToLoginPage} text="Log in" />
+                    </Card>
+                </div>
+            ) : (
+                <div className={styles.cardWrapper}>
+                    <Card
+                        title="Reset password"
+                        subtitle="Reset password to manage your account"
+                    >
+                        <div className={styles.inputWrapper}>
+                            <div>
                                 <img
-                                    className={styles.passwordImgVisible}
-                                    src="/images/visible.png"
-                                    alt="visible"
-                                    name="password"
-                                    onClick={onVisibilityChange}
+                                    src="/images/formPassword.png"
+                                    alt="mail"
                                 />
-                            ) : (
-                                <img
-                                    className={styles.passwordImgHidden}
-                                    src="/images/hide.png"
-                                    alt="hidden"
+                                {visible.password ? (
+                                    <img
+                                        className={styles.passwordImgVisible}
+                                        src="/images/visible.png"
+                                        alt="visible"
+                                        name="password"
+                                        onClick={onVisibilityChange}
+                                    />
+                                ) : (
+                                    <img
+                                        className={styles.passwordImgHidden}
+                                        src="/images/hide.png"
+                                        alt="hidden"
+                                        name="password"
+                                        onClick={onVisibilityChange}
+                                    />
+                                )}
+                                <input
+                                    type={
+                                        visible.password ? "text" : "password"
+                                    }
                                     name="password"
-                                    onClick={onVisibilityChange}
+                                    value={userDetails?.password}
+                                    onChange={onChange}
+                                    placeholder="Enter New password"
                                 />
-                            )}
-                            <input
-                                type={visible.password ? "text" : "password"}
-                                name="password"
-                                value={userDetails?.password}
-                                onChange={onChange}
-                                placeholder="Enter New password"
-                            />
-                        </div>
+                            </div>
 
-                        <div>
-                            <img src="/images/formPassword.png" alt="mail" />
-                            {visible.confirmPassword ? (
+                            <div>
                                 <img
-                                    className={styles.passwordImgVisible}
-                                    src="/images/visible.png"
-                                    alt="visible"
-                                    name="confirmPassword"
-                                    onClick={onVisibilityChange}
+                                    src="/images/formPassword.png"
+                                    alt="mail"
                                 />
-                            ) : (
-                                <img
-                                    className={styles.passwordImgHidden}
-                                    src="/images/hide.png"
-                                    alt="hidden"
+                                {visible.confirmPassword ? (
+                                    <img
+                                        className={styles.passwordImgVisible}
+                                        src="/images/visible.png"
+                                        alt="visible"
+                                        name="confirmPassword"
+                                        onClick={onVisibilityChange}
+                                    />
+                                ) : (
+                                    <img
+                                        className={styles.passwordImgHidden}
+                                        src="/images/hide.png"
+                                        alt="hidden"
+                                        name="confirmPassword"
+                                        onClick={onVisibilityChange}
+                                    />
+                                )}
+                                <input
+                                    type={
+                                        visible.confirmPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     name="confirmPassword"
-                                    onClick={onVisibilityChange}
+                                    value={userDetails?.confirmPassword}
+                                    onChange={onChange}
+                                    placeholder="Confirm New password"
                                 />
-                            )}
-                            <input
-                                type={
-                                    visible.confirmPassword
-                                        ? "text"
-                                        : "password"
-                                }
-                                name="confirmPassword"
-                                value={userDetails?.confirmPassword}
-                                onChange={onChange}
-                                placeholder="Confirm New password"
-                            />
+                            </div>
+                            <Button onClick={submit} text="Confirm Reset" />
                         </div>
-                        <Button onClick={submit} text="Confirm Reset" />
-                    </div>
-                </Card>
-            </div>
+                    </Card>
+                </div>
+            )}
         </>
     );
 };

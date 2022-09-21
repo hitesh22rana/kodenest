@@ -29,6 +29,8 @@ const Login = () => {
     const [isSeverity, setIsSeverity] = useState("");
     const [message, setMessage] = useState("");
 
+    const [isReset, setIsReset] = useState(false);
+
     const onChange = (event) => {
         setUserDetails({
             ...userDetails,
@@ -52,9 +54,6 @@ const Login = () => {
         }
 
         try {
-            setMessage("");
-            setIsSeverity("");
-            setIsAlert(false);
             const { data } = await login({
                 email: userDetails?.email,
                 password: userDetails?.password,
@@ -77,20 +76,24 @@ const Login = () => {
         }
 
         try {
-            setMessage("");
-            setIsSeverity("");
-            setIsAlert(false);
-
             const { data } = await forgot({ email: userDetails?.email });
 
-            setMessage(data.message);
-            setIsSeverity("success");
-            setIsAlert(true);
+            setTimeout(() => {
+                setMessage(data.message);
+                setIsSeverity("success");
+                setIsAlert(true);
+                setIsReset((prev) => !prev);
+            }, 1000);
         } catch (err) {
             setMessage(err.response.data.message);
             setIsSeverity("error");
             setIsAlert(true);
         }
+    }
+
+    function afterReset() {
+        setIsReset((prev) => !prev);
+        setShowForgotScreen((prev) => !prev);
     }
 
     return (
@@ -106,7 +109,14 @@ const Login = () => {
 
             <BackNavigation linkTo={showForgotScreen ? "/authenticate" : "/"} />
 
-            {showForgotScreen ? (
+            {isReset ? (
+                <Card
+                    title="Hurray! 🤩"
+                    subtitle={`Reset Password Link has been sent to ${userDetails?.email}`}
+                >
+                    <Button onClick={afterReset} text="Login" />
+                </Card>
+            ) : showForgotScreen ? (
                 <div className={styles.cardWrapper}>
                     <Card
                         title="Reset your password"
