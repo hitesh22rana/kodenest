@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./StepOtp.module.scss";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -50,7 +50,7 @@ const StepOtp = () => {
     const [alertmessage, setAlertMessage] = useState("");
 
     async function submit() {
-        if (!otp || !email || !password || !hash) {
+        if (!otp || otp.length !== 6 || !email || !password || !hash) {
             setAlertMessage("Please enter a valid OTP!");
             setIsAlert(true);
             return;
@@ -61,7 +61,6 @@ const StepOtp = () => {
             const { data } = await verifyOtp({ otp, email, password, hash });
             dispatch(setAuth(data));
         } catch (err) {
-            setOtp("");
             setAlertMessage(err?.response?.data?.message);
             setIsAlert(true);
         }
@@ -86,6 +85,15 @@ const StepOtp = () => {
             return;
         }
     }
+
+    useEffect(() => {
+        function checkOtpLength() {
+            if (otp.length >= 6) {
+                submit();
+            }
+        }
+        checkOtpLength();
+    }, [otp]);
 
     return (
         <>
