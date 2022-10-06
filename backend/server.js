@@ -34,7 +34,7 @@ app.use(router);
 // Web Sockets logic
 const socketUserMap = {};
 
-io.on('connection', (socket) => {
+io.on(ACTIONS.CONNECTION, (socket) => {
     socket.on(ACTIONS.JOIN, ({ roomId, user }) => {
         socketUserMap[socket.id] = user;
 
@@ -126,7 +126,7 @@ io.on('connection', (socket) => {
     socket.on(ACTIONS.LEAVE, leaveRoom);
 
     // If any type of disconnecting event occours such as browser close 
-    socket.on('disconnecting', leaveRoom);
+    socket.on(ACTIONS.DISCONNECT, leaveRoom);
 
 });
 

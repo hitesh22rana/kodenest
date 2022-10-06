@@ -158,7 +158,9 @@ $primary: #fff;
                 border-top-right-radius: 0px;
                 top: 50px;
                 right: 20px;
-                padding: 20px;
+                padding: 18px;
+                box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
+                border: 2px solid rgba(119, 36, 204, 0.5);
 
                 div:nth-child(1) {
                     display: flex;
@@ -208,9 +210,16 @@ $primary: #fff;
                         font-size: 1em;
                         font-weight: lighter;
                         letter-spacing: 1px;
+                        transition: 0.5s transform, margin, box-shadow, border;
+                        transition-timing-function: ease-in-out;
 
                         &:hover {
+                            transform: scale(1.03);
+                            margin: 3px auto;
                             background: rgba(255, 255, 255, 0.2);
+                            box-shadow: 5.4px 10.9px 20.9px
+                                rgb(119 36 204 / 10%);
+                            border: 2px solid rgba(119, 36, 204, 0.5);
                         }
 
                         .userIcons {
@@ -232,7 +241,7 @@ $primary: #fff;
                     border-top-right-radius: 0px;
                     top: 45px;
                     right: 20px;
-                    padding: 15px;
+                    padding: 12px;
 
                     div:nth-child(1) {
                         padding-bottom: 10px;

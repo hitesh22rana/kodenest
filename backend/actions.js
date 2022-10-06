@@ -1,6 +1,8 @@
 const ACTIONS = {
+    CONNECTION: 'connection',
     JOIN: 'join',
     LEAVE: 'leave',
+    DISCONNECT: 'disconnecting',
     ADD_PEER: 'add-peer',
     REMOVE_PEER: 'remove-peer',
     RELAY_ICE: 'relay-ice',

@@ -18,10 +18,12 @@
     height: 420px;
     width: 100%;
     background: #1d1d1d;
-    border-radius: 10px;
+    border-radius: 20px;
     z-index: 999;
     margin: auto;
     animation: modalPopUp 0.3s;
+    box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
+    border: 2px solid rgba(119, 36, 204, 0.5);
 
     @media (max-width: 756px) {
         width: 450px;
@@ -36,22 +38,27 @@
         cursor: pointer;
         position: absolute;
         right: 5px;
-        top: 10px;
+        top: 20px;
         background: none;
         border: none;
 
         > img {
             width: 25px;
             height: 25px;
+            transition: 0.4s all ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
 
     .modalHeader {
-        padding: 30px;
+        padding: 20px 30px;
         border-bottom: 2px solid #262626;
 
         .heading {
-            margin-bottom: 5px;
+            margin-bottom: 20px;
         }
 
         .subHeading {
@@ -81,6 +88,9 @@
 
             .typeBox.active {
                 background: #262626;
+                box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
+                border: 2px solid rgba(119, 36, 204, 0.5);
+                padding: 8px 0px;
             }
         }
     }
