@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./RoomCardModal.module.scss";
 
 const RoomCardModal = ({ roomTopic, onClose, confirmEnter }) => {

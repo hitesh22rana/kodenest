@@ -1,36 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { useWebRTC } from "../../hooks/useWebRTC";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useWebRTC } from "../../hooks/useWebRTC";
 import { getRoom } from "../../http";
 import styles from "./Room.module.scss";
 import Navigation from "../../components/shared/Navigation/Navigation";
+import { setPopUp, setTokenValue } from "../../store/privateRoomSlice";
+import Alerts from "../../components/shared/Alerts/Alerts";
 
 const Room = () => {
     const { id: roomId } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
+    const { token } = useSelector((state) => state.privateRoom);
     const [room, setRoom] = useState(null);
+    const [copyToClipBoard, setCopyToClipBoard] = useState(false);
 
     useEffect(() => {
         const fetchRoom = async () => {
             try {
                 const { data } = await getRoom(roomId);
+
+                if (data.secretToken !== token) {
+                    dispatch(setPopUp(true));
+                    throw new Error("Unauthorized!");
+                }
+
                 setRoom((prev) => data);
                 new Audio("/sound/join.wav").play();
+
+                if (user?.id === data?.ownerId && token !== "") {
+                    navigator.clipboard.writeText(token);
+                    setCopyToClipBoard(true);
+                }
             } catch (err) {
+                dispatch(setTokenValue(""));
                 navigate("/rooms");
             }
         };
         fetchRoom();
-    }, [roomId]);
+    }, [roomId, user?.id, token, dispatch, navigate]);
 
     const [isMuted, setMuted] = useState(true);
     const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
 
     useEffect(() => {
         handleMute(isMuted, user?.id);
-    }, [isMuted]);
+    }, [isMuted, user?.id, handleMute]);
 
     const handleMuteClick = (clientId) => {
         if (clientId !== user?.id) return;
@@ -39,12 +56,22 @@ const Room = () => {
 
     const handManualLeave = () => {
         new Audio("/sound/leave.mp3").play();
+        dispatch(setPopUp(false));
+        dispatch(setTokenValue(""));
         navigate("/rooms");
     };
 
     return (
         <>
             <Navigation />
+            {copyToClipBoard && (
+                <Alerts
+                    message="Copied to clipboard!"
+                    isAlert={copyToClipBoard}
+                    setIsAlert={setCopyToClipBoard}
+                    severity="success"
+                />
+            )}
             <div className={styles.container}>
                 <button onClick={handManualLeave}>
                     <img src="/images/arrow-left.png" alt="arrow-left" />
@@ -53,7 +80,23 @@ const Room = () => {
             </div>
             <div className={styles.clientsWrap}>
                 <div className={styles.header}>
-                    {room && <h2 className={styles.topic}>{room.topic}</h2>}
+                    <div className={styles.roomData}>
+                        {room && <h2 className={styles.topic}>{room.topic}</h2>}
+                        {room && room?.roomType === "private" && (
+                            <button
+                                onClick={() => {
+                                    navigator.clipboard.writeText(
+                                        room?.secretToken
+                                    );
+                                    setCopyToClipBoard(true);
+                                }}
+                                className={styles.secretTokenButton}
+                            >
+                                <span>{room?.secretToken}</span>
+                                <img src="/images/copy.png" alt=" " />
+                            </button>
+                        )}
+                    </div>
                     <div className={styles.actions}>
                         <button onClick={handManualLeave}>
                             <img src="/images/win.png" alt="win-icon" />

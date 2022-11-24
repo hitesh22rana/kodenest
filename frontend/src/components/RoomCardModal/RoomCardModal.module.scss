@@ -14,13 +14,12 @@
     position: fixed;
     justify-content: center;
     flex-direction: column;
-    height: 200px;
+    height: 180px;
     width: 90%;
     min-width: 300px;
     max-width: 350px;
     background: #1d1d1d;
     padding: 15px 30px;
-    border-radius: 2px;
     right: 0;
     top: 0;
     bottom: 0;
@@ -28,8 +27,9 @@
     margin: auto;
     z-index: 9999;
     animation: modalPopUp 0.3s;
-    box-shadow: 5.4px 10.9px 20.9px rgb(46 143 85 / 10%);
     border-radius: 5px;
+    box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
+    border: 2px solid rgba(119, 36, 204, 0.5);
 
     > div {
         display: flex;

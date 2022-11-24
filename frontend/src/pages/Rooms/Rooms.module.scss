@@ -25,7 +25,7 @@
             width: 100%;
             margin: 20px 0px;
 
-            @media (max-width: 756px) {
+            @media (max-width: 850px) {
                 justify-content: center;
                 flex-direction: column;
             }
@@ -67,12 +67,13 @@
 
                 .searchBox {
                     background: #262626;
+                    color: #fff;
                     margin-left: 20px;
                     display: flex;
                     align-items: center;
-                    padding: 0 10px;
+                    padding: 0px 0px 0px 10px;
                     min-width: 300px;
-                    border-radius: 20px;
+                    border-radius: 50px;
                     box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
                     border: 2px solid rgba(119, 36, 204, 0.5);
 
@@ -80,26 +81,45 @@
                         background: transparent;
                         border: none;
                         outline: none;
-                        padding: 10px;
                         color: #fff;
                         width: 100%;
+                        font-size: 1em;
+                        font-weight: 500;
                     }
 
-                    @media (max-width: 576px) {
-                        min-width: 180px;
+                    .searchInput::placeholder {
+                        color: #fff;
+                        font-size: 0.9em;
+                        opacity: 0.5;
+                    }
+
+                    > img {
+                        cursor: pointer;
+                        border-top-right-radius: 50px;
+                        border-bottom-right-radius: 50px;
+                        border-left: 1px solid rgb(48, 48, 48);
+                        background: rgb(48, 48, 48);
+                        padding: 6px 14px 6px 10px;
+                    }
+
+                    @media (max-width: 756px) {
                         margin-left: 0px;
                     }
                 }
             }
 
             .right {
-                .startRoomButton {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+
+                > button {
                     cursor: pointer;
                     display: flex;
                     align-items: center;
                     background: rgb(32, 189, 95);
                     font-weight: 500;
-                    padding: 5px 20px;
+                    padding: 7px 15px;
                     border-radius: 20px;
                     border: none;
                     color: #fff;
@@ -111,15 +131,24 @@
                         border: 2px solid #3a5a40;
                         background: rgba(32, 189, 95, 0.7);
                     }
+
+                    > img {
+                        width: 16px;
+                        height: 16px;
+                    }
                 }
 
-                .startRoomButton span {
+                > button:nth-child(1) span {
+                    margin-left: 0px;
+                }
+
+                > button span {
                     font-size: 16px;
-                    margin-left: 10px;
+                    margin-left: 5px;
                 }
 
-                @media (max-width: 756px) {
-                    margin: 7px auto;
+                @media (max-width: 850px) {
+                    margin: 15px auto 10px auto;
                 }
             }
         }
@@ -135,14 +164,14 @@
             grid-template-columns: repeat(3, 1fr);
         }
 
-        @media (max-width: 756px) {
+        @media (max-width: 786px) {
+            margin: 30px 10px 10px 10px;
             grid-template-columns: repeat(2, 1fr);
-            margin-top: 40px;
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 500px) {
             grid-template-columns: repeat(1, 1fr);
-            margin: 20px auto 10px auto;
+            margin: 20px 10px 10px 10px;
         }
     }
 }

@@ -16,5 +16,6 @@ router.post('/api/logout', authMiddleware, AuthController.logout);
 router.post('/api/rooms', authMiddleware, RoomsController.create);
 router.get('/api/rooms', authMiddleware, RoomsController.getAll);
 router.get('/api/room/:roomId', authMiddleware, RoomsController.getRoomByID);
+router.post('/api/room', authMiddleware, RoomsController.getPrivateRoomByToken);
 
 module.exports = router;

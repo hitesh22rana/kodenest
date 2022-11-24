@@ -30,7 +30,8 @@ $primary: #fff;
         height: 40px;
         margin-bottom: 15px;
 
-        > a {
+        > a,
+        .kodenestNav {
             display: flex;
             flex-direction: row;
             color: $primary;
@@ -51,12 +52,6 @@ $primary: #fff;
         .navRight {
             display: flex;
             flex-direction: row;
-
-            @media (max-width: 600px) {
-                .navRoom:last-child() {
-                    display: none;
-                }
-            }
 
             .navRoom {
                 position: relative;
@@ -79,7 +74,7 @@ $primary: #fff;
                 align-items: center;
                 margin: auto 0px;
 
-                > a {
+                > div {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -119,6 +114,7 @@ $primary: #fff;
                 transition: all 0.2s ease-in-out;
 
                 .userSettingsIcon {
+                    cursor: pointer;
                     color: #fff;
                     height: 30px;
                     width: 29px;

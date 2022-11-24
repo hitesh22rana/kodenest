@@ -4,11 +4,18 @@ import Navigation from "../../components/shared/Navigation/Navigation";
 import RoomCard from "../../components/RoomCard/RoomCard";
 import RoomModal from "../../components/RoomModal/RoomModal";
 import { getAllRooms } from "../../http";
+import PrivateRoomModal from "../../components/PrivateRoomModal/PrivateRoomModal";
+import { useSelector, useDispatch } from "react-redux";
+import { setPopUp } from "../../store/privateRoomSlice";
 
 const Rooms = () => {
+    const dispatch = useDispatch();
     const [rooms, setRooms] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showPrivateRoomModal, setShowPrivateRoomModal] = useState(false);
     const [search, setSearch] = React.useState("");
+
+    const { popUp } = useSelector((state) => state.privateRoom);
 
     useEffect(() => {
         const fetchRooms = async () => {
@@ -35,6 +42,15 @@ const Rooms = () => {
         setShowModal((prev) => !prev);
     }
 
+    function openPrivateRoomModal() {
+        setShowPrivateRoomModal((prev) => !prev);
+    }
+
+    function handlePrivateRoom() {
+        dispatch(setPopUp(false));
+        setShowPrivateRoomModal((prev) => !prev);
+    }
+
     return (
         <>
             <Navigation />
@@ -44,23 +60,24 @@ const Rooms = () => {
                         <div className={styles.left}>
                             <span className={styles.heading}>All rooms</span>
                             <div className={styles.searchBox}>
+                                <input
+                                    type="text"
+                                    value={search}
+                                    placeholder="Search"
+                                    onChange={handleSearch}
+                                    className={styles.searchInput}
+                                />
                                 <img
                                     src="/images/search-icon.png"
                                     alt="search"
                                 />
-                                <input
-                                    type="text"
-                                    value={search}
-                                    onChange={handleSearch}
-                                    className={styles.searchInput}
-                                />
                             </div>
                         </div>
                         <div className={styles.right}>
-                            <button
-                                onClick={openModal}
-                                className={styles.startRoomButton}
-                            >
+                            <button onClick={openPrivateRoomModal}>
+                                <span>Join private room</span>
+                            </button>
+                            <button onClick={openModal}>
                                 <img
                                     src="/images/add-room-icon.png"
                                     alt="add-room"
@@ -77,6 +94,9 @@ const Rooms = () => {
                 </div>
                 {showModal && (
                     <RoomModal onClose={() => setShowModal((prev) => !prev)} />
+                )}
+                {(showPrivateRoomModal || popUp) && (
+                    <PrivateRoomModal onClose={handlePrivateRoom} />
                 )}
             </div>
         </>

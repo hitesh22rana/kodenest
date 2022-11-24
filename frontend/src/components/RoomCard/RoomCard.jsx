@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./RoomCard.module.scss";
 import { useNavigate } from "react-router-dom";
 

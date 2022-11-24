@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import styles from "./StepOtp.module.scss";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import OTPInput, { ResendOTP } from "otp-input-react";
+
+import styles from "./StepOtp.module.scss";
 
 import BackNavigation from "../../../components/shared/BackNavigation/BackNavigation";
 import Card from "../../../components/shared/Card/Card";
@@ -40,7 +40,7 @@ const renderButton = (buttonProps) => {
     );
 };
 
-const renderTime = () => React.Fragment;
+const renderTime = () => <></>;
 
 const StepOtp = () => {
     const [otp, setOtp] = useState("");
@@ -121,6 +121,7 @@ const StepOtp = () => {
                             OTPLength={6}
                             otpType="number"
                             disabled={false}
+                            shouldAutoFocus={true}
                             style={{
                                 display: "flex",
                                 alignItems: "center",

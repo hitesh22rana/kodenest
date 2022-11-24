@@ -1,11 +1,19 @@
 const RoomModel = require("../models/room");
+const otpService = require("./otp-service");
 
 class RoomService {
     async create(payload) {
         const { topic, roomType, ownerId } = payload;
+
+        let secretToken = '';
+        if (roomType === 'private') {
+            secretToken = await otpService.generateSecretToken();
+        }
+
         const room = await RoomModel.create({
             topic,
             roomType,
+            secretToken,
             ownerId,
             speakers: [ownerId]
         });
@@ -27,6 +35,15 @@ class RoomService {
             return room;
         } catch (err) {
             return null;
+        }
+    }
+
+    async getRoomBySecretToken(token) {
+        try {
+            const room = await RoomModel.findOne({ secretToken: token });
+            return room
+        } catch (err) {
+            return null
         }
     }
 }

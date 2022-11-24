@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,6 @@ import { setAuth } from "../../../store/authSlice";
 
 import LogoutModal from "../../LogoutModal/LogoutModal";
 
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -33,15 +32,22 @@ const Navigation = () => {
     return (
         <div className={styles.wrapper}>
             <nav className={styles.navBar}>
-                <Link to="/">
-                    <img src="/images/logo.png" alt="logo" />
-                    <span>KodeNest</span>
-                </Link>
+                {isAuth ? (
+                    <div className={styles.kodenestNav}>
+                        <img src="/images/logo.png" alt="logo" />
+                        <span>KodeNest</span>
+                    </div>
+                ) : (
+                    <Link to="/">
+                        <img src="/images/logo.png" alt="logo" />
+                        <span>KodeNest</span>
+                    </Link>
+                )}
                 <div className={styles.navRight}>
                     {isAuth ? (
                         <div className={styles.navRoom}>
                             <div className={styles.navUser}>
-                                <Link to="/rooms">
+                                <div>
                                     <img
                                         src={
                                             user.avatar
@@ -50,7 +56,7 @@ const Navigation = () => {
                                         }
                                         alt="avatar"
                                     />
-                                </Link>
+                                </div>
                             </div>
                             <button
                                 className={styles.button}
@@ -58,15 +64,14 @@ const Navigation = () => {
                                     setShowUserNavigation((prev) => !prev)
                                 }
                             >
-                                {showUserNavigation ? (
-                                    <ExpandMoreIcon
-                                        className={styles.userSettingsIcon}
-                                    />
-                                ) : (
-                                    <ExpandLessIcon
-                                        className={styles.userSettingsIcon}
-                                    />
-                                )}
+                                <ExpandLessIcon
+                                    className={styles.userSettingsIcon}
+                                    style={
+                                        showUserNavigation
+                                            ? { transform: "rotate(180deg)" }
+                                            : { transform: "rotate(0deg)" }
+                                    }
+                                />
                             </button>
                             {showUserNavigation && (
                                 <>

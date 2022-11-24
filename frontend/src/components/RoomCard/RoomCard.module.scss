@@ -3,11 +3,16 @@
     background: #1d1d1d;
     padding: 20px;
     border-radius: 10px;
-    min-width: 210px;
+    min-width: 220px;
     max-width: 280px;
     width: 100%;
     box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
     border: 2px solid rgba(119, 36, 204, 0.5);
+
+    @media (max-width: 786px) {
+        max-width: none;
+        width: 100%;
+    }
 
     .topic {
         font-weight: 600;

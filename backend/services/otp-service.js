@@ -8,6 +8,18 @@ class OtpService {
         return otp;
     }
 
+    async generateSecretToken() {
+        const specialSymbols = ['@', '#', '$', '*'];
+        const randomInt = crypto.randomInt(100000, 999999).toString()
+
+        const randomPrefix = specialSymbols[Math.floor(Math.random() * specialSymbols.length)]
+        const randomIndex = Math.floor(Math.random() * 4) + 1
+        const randomSuffix = specialSymbols[Math.floor(Math.random() * specialSymbols.length)]
+        const token = randomPrefix + randomInt.substring(0, randomIndex) + randomSuffix + randomInt.substring(randomIndex)
+
+        return token
+    }
+
     sendByEmail(email, otp) {
         const transporter = nodemailer.createTransport({
             service: "gmail",

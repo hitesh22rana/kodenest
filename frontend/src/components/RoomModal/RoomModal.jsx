@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./RoomModal.module.scss";
 import TextInput from "../shared/TextInput/TextInput";
 import Alerts from "../shared/Alerts/Alerts";
 import { createRoom as create } from "../../http";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setTokenValue } from "../../store/privateRoomSlice";
 
 const RoomModal = ({ onClose }) => {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const [roomType, setRoomType] = useState("open");
     const [topic, setTopic] = useState("");
     const [isAlert, setIsAlert] = useState(false);
@@ -15,7 +17,7 @@ const RoomModal = ({ onClose }) => {
 
     async function createRoom() {
         try {
-            if (!topic) {
+            if (!topic || !topic.trim()) {
                 setAlertMessage("Invalid topic name!");
                 setIsAlert(true);
                 return;
@@ -26,9 +28,14 @@ const RoomModal = ({ onClose }) => {
                 topic: topic.trim(),
                 roomType: roomType,
             });
+
+            if (data.roomType === "private") {
+                dispatch(setTokenValue(data.secretToken));
+            }
             navigate(`/room/${data?.id}`);
         } catch (err) {
-            console.log(err?.message);
+            setAlertMessage("Unable to create room!");
+            setIsAlert(true);
         }
     }
 
@@ -67,15 +74,6 @@ const RoomModal = ({ onClose }) => {
                             <span>Open</span>
                         </div>
                         <div
-                            onClick={() => setRoomType("social")}
-                            className={`${styles.typeBox} ${
-                                roomType === "social" ? styles.active : ""
-                            }`}
-                        >
-                            <img src="/images/social.png" alt="social" />
-                            <span>Social</span>
-                        </div>
-                        <div
                             onClick={() => setRoomType("private")}
                             className={`${styles.typeBox} ${
                                 roomType === "private" ? styles.active : ""
@@ -87,7 +85,12 @@ const RoomModal = ({ onClose }) => {
                     </div>
                 </div>
                 <div className={styles.modalFooter}>
-                    <h2>Start a room, open to everyone</h2>
+                    {roomType === "open" ? (
+                        <h2>Start a room, open for everyone</h2>
+                    ) : (
+                        <h2>Start a private room.</h2>
+                    )}
+
                     <button
                         onClick={createRoom}
                         className={styles.footerButton}

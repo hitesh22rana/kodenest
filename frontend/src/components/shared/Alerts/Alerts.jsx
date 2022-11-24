@@ -1,8 +1,8 @@
-import React from "react";
+import { forwardRef } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -21,7 +21,7 @@ export default function Alerts({
     };
 
     return (
-        <Snackbar open={isAlert} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={isAlert} autoHideDuration={5000} onClose={handleClose}>
             <Alert
                 onClose={handleClose}
                 severity={severity}
