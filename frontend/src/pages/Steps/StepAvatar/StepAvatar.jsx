@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "../../../components/shared/Card/Card";
 import Button from "../../../components/shared/Button/Button";
 import styles from "./StepAvatar.module.scss";

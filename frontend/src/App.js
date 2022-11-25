@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 
 import Loading from "./components/shared/Loading/Loading";

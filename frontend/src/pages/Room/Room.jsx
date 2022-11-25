@@ -81,7 +81,13 @@ const Room = () => {
             <div className={styles.clientsWrap}>
                 <div className={styles.header}>
                     <div className={styles.roomData}>
-                        {room && <h2 className={styles.topic}>{room.topic}</h2>}
+                        {room && (
+                            <h2 className={styles.topic}>
+                                {room?.topic.length > 25
+                                    ? room?.topic.substring(0, 25) + "..."
+                                    : room?.topic}
+                            </h2>
+                        )}
                         {room && room?.roomType === "private" && (
                             <button
                                 onClick={() => {
@@ -92,6 +98,7 @@ const Room = () => {
                                 }}
                                 className={styles.secretTokenButton}
                             >
+                                <span className={styles.copyToolTip}>Copy</span>
                                 <span>{room?.secretToken}</span>
                                 <img src="/images/copy.png" alt=" " />
                             </button>

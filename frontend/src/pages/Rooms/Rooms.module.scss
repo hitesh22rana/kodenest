@@ -90,7 +90,7 @@
                     .searchInput::placeholder {
                         color: #fff;
                         font-size: 0.9em;
-                        opacity: 0.5;
+                        opacity: 0.8;
                     }
 
                     > img {
@@ -169,7 +169,7 @@
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 450px) {
             grid-template-columns: repeat(1, 1fr);
             margin: 20px 10px 10px 10px;
         }

@@ -67,6 +67,7 @@
         }
 
         .secretTokenButton {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -78,6 +79,30 @@
             color: #fff;
             border: none;
             cursor: pointer;
+
+            &:hover {
+                .copyToolTip {
+                    display: inline-block;
+                }
+            }
+
+            .copyToolTip {
+                cursor: default;
+                position: absolute;
+                display: none;
+                top: -30px;
+                right: 50px;
+                padding: 4px 8px;
+                font-size: 1.05em;
+                font-weight: 500;
+                border-radius: 5px;
+                background: rgba(51, 51, 51, 0.6);
+                letter-spacing: normal;
+
+                @media (max-width: 576px) {
+                    display: none !important;
+                }
+            }
 
             > span {
                 font-size: 1.1em;

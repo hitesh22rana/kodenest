@@ -188,7 +188,7 @@ $primary: #fff;
                     flex-direction: column;
                     align-items: center;
                     width: 100%;
-                    margin: 10px auto 0px auto;
+                    margin: 5px auto 0px auto;
 
                     button {
                         cursor: pointer;
@@ -206,16 +206,14 @@ $primary: #fff;
                         font-size: 1em;
                         font-weight: lighter;
                         letter-spacing: 1px;
-                        transition: 0.5s transform, margin, box-shadow, border;
+                        transition: 0.2s transform, box-shadow;
                         transition-timing-function: ease-in-out;
 
                         &:hover {
-                            transform: scale(1.03);
-                            margin: 3px auto;
+                            transform: scale(1.01);
                             background: rgba(255, 255, 255, 0.2);
                             box-shadow: 5.4px 10.9px 20.9px
                                 rgb(119 36 204 / 10%);
-                            border: 2px solid rgba(119, 36, 204, 0.5);
                         }
 
                         .userIcons {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./StepName.module.scss";
 
 import Card from "../../../components/shared/Card/Card";

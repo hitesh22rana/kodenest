@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./StepPhoneEmail.module.scss";
 import BackNavigation from "../../../components/shared/BackNavigation/BackNavigation";
 import Email from "./Email/Email";

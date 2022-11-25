@@ -8,6 +8,7 @@ services:
       - "27017:27017"
     volumes:
       - /var/databases/mongodb/kodenest:/data/db
+
   backend:
     build:
       dockerfile: Dockerfile.prod
@@ -23,18 +24,15 @@ services:
       - /backend/node_modules
     depends_on:
       - mongodb
+
   frontend:
     build:
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.dev
       context: ./
     container_name: frontend
     ports:
-      - "80:80"
-      - "443:443"
+      - "3000:3000"
     env_file:
       - ./frontend/.env
-    volumes:
-      - ./deploy/default.conf:/etc/nginx/sites-available/default
-      - /var/certs/etc-letsencrypt:/etc/letsencrypt
     depends_on:
       - backend

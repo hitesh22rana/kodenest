@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import styles from "./Rooms.module.scss";
 import Navigation from "../../components/shared/Navigation/Navigation";
 import RoomCard from "../../components/RoomCard/RoomCard";
@@ -13,7 +13,7 @@ const Rooms = () => {
     const [rooms, setRooms] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showPrivateRoomModal, setShowPrivateRoomModal] = useState(false);
-    const [search, setSearch] = React.useState("");
+    const [search, setSearch] = useState("");
 
     const { popUp } = useSelector((state) => state.privateRoom);
 

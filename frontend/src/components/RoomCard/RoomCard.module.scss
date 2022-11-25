@@ -8,9 +8,13 @@
     width: 100%;
     box-shadow: 5.4px 10.9px 20.9px rgb(119 36 204 / 10%);
     border: 2px solid rgba(119, 36, 204, 0.5);
+    transform: translateY(50%);
+    animation: slideInFromDown 1s forwards;
+    opacity: 0;
 
     @media (max-width: 786px) {
         max-width: none;
+        min-width: 200px;
         width: 100%;
     }
 
@@ -67,5 +71,15 @@
     .peopleCount span {
         font-weight: bold;
         margin-right: 5px;
+    }
+}
+
+@keyframes slideInFromDown {
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
     }
 }
