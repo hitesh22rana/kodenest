@@ -20,13 +20,16 @@
 
     .topic {
         font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     .speakers {
         display: flex;
         align-items: center;
         position: relative;
-        margin: 20px 0;
+        margin: 20px 0px 5px 0px;
     }
 
     .avatars img {
@@ -52,10 +55,6 @@
 
     .singleSpeaker .names {
         margin-left: 20px;
-    }
-
-    .names {
-        margin-left: 100px;
     }
 
     .names span {

@@ -54,38 +54,37 @@
             align-items: center;
             justify-content: flex-end;
             margin: 20px 0px;
+            gap: 10px;
 
             button {
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 10px 20px;
-                margin: auto 4px;
                 outline: none;
                 border: none;
                 border-radius: 2px;
-                font-size: 0.9em;
+                font-size: 1em;
                 font-weight: normal;
-                transition: 0.5s all ease-in-out;
-            }
-
-            button:nth-child(1) {
-                background: rgba(29, 29, 29, 0.8);
-                color: #20bd5f;
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgb(32, 189, 95);
+                border: none;
+                width: 100px;
+                padding: 10px;
+                color: white;
+                box-shadow: 0px 6px 18px -5px rgba(46, 143, 85, 1);
+                transition: 0.4s background ease-in-out;
 
                 &:hover {
-                    background: rgba(45, 56, 62, 0.2);
+                    background: rgb(46, 133, 81);
                 }
             }
 
-            button:last-child {
-                background: #20bd5f;
-                color: #fff;
+            button:nth-child(1) {
+                background: #ed6755;
+                box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1);
 
                 &:hover {
-                    background: #13763b;
+                    background: rgba(237, 103, 85, 0.6);
                 }
             }
         }

@@ -63,18 +63,21 @@ const PrivateRoomModal = ({ onClose }) => {
                         onChange={(e) => setToken(e.target.value)}
                         style={{
                             letterSpacing: "10px",
+                            width: "100%",
                         }}
                     />
                 </div>
 
-                <img src="/images/joinus.png" alt="" />
+                <button onClick={enterRoom} className={styles.footerButton}>
+                    <img src="/images/celebration.png" alt="celebration" />
+                    <span>Let's go</span>
+                </button>
 
-                <div className={styles.modalFooter}>
-                    <button onClick={enterRoom} className={styles.footerButton}>
-                        <img src="/images/celebration.png" alt="celebration" />
-                        <span>Let's go</span>
-                    </button>
-                </div>
+                <img
+                    src="/images/joinus.png"
+                    alt=""
+                    className={styles.heroImage}
+                />
             </div>
         </>
     );

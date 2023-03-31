@@ -100,7 +100,7 @@ const Navigation = () => {
                                                 <AccountCircleIcon
                                                     className={styles.userIcons}
                                                 />
-                                                My Profile
+                                                Profile
                                             </button>
                                             <button
                                                 onClick={logoutConfirmation}

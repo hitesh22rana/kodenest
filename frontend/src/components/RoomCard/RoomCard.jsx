@@ -19,11 +19,7 @@ const RoomCard = ({ room }) => {
     return (
         <>
             <div onClick={handleEnterRoom} className={styles.card}>
-                <h3 className={styles.topic}>
-                    {room?.topic.length > 20
-                        ? room?.topic.substring(0, 20) + "..."
-                        : room?.topic}
-                </h3>
+                <h3 className={styles.topic}>{room?.topic}</h3>
                 <div
                     className={`${styles.speakers} ${
                         room.speakers.length === 1 ? styles.singleSpeaker : ""

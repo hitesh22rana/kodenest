@@ -5,6 +5,10 @@ node_modules
 /.pnp
 .pnp.js
 
+Spacefile
+.spaceignore
+.space
+
 # testing
 /coverage
 
@@ -152,3 +156,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.space

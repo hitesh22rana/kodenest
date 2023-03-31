@@ -208,9 +208,11 @@ $primary: #fff;
                         letter-spacing: 1px;
                         transition: 0.2s transform, box-shadow;
                         transition-timing-function: ease-in-out;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
 
                         &:hover {
-                            transform: scale(1.01);
                             background: rgba(255, 255, 255, 0.2);
                             box-shadow: 5.4px 10.9px 20.9px
                                 rgb(119 36 204 / 10%);

@@ -8,6 +8,10 @@
 }
 
 .modalBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
     position: fixed;
     right: 0;
     top: 0;
@@ -15,7 +19,8 @@
     left: 0;
     min-width: 320px;
     max-width: 400px;
-    height: 300px;
+    max-height: 300px;
+    height: 100%;
     width: 100%;
     background: #1d1d1d;
     border-radius: 10px;
@@ -52,78 +57,60 @@
 
     .modalHeader {
         padding: 20px 30px;
+        width: 100%;
 
         .heading {
             margin-bottom: 20px;
-        }
-
-        .subHeading {
-            font-size: 18px;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-
-        .otpInputContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .otpInputValue {
-                width: 40px;
-                border: 2px solid rgba(119, 36, 204, 1);
-            }
-
-            .otpInputValue:focus {
-                border: 2px solid rgba(213, 211, 217, 1);
-            }
+            text-align: center;
         }
     }
 
-    > img {
+    .heroImage {
         position: absolute;
         z-index: -10;
         background: transparent;
         object-fit: cover;
-        opacity: 0.9;
+        opacity: 0.8;
         width: 100px;
         height: 100px;
-        top: 0;
+        top: 11%;
         right: 0;
         left: 0;
         bottom: 0;
         margin: auto;
+        transition: all 0.3s ease-in-out;
     }
 
-    > img:nth-child(1) {
-        opacity: 1;
-    }
+    .footerButton {
+        cursor: pointer;
+        background: #20bd5f;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        width: 200px;
+        justify-content: center;
+        padding: 7px 10px;
+        border-radius: 20px;
+        border: none;
+        margin: 75px auto 0px auto;
+        transition: all 0.3s ease-in-out;
 
-    .modalFooter {
-        padding: 30px;
-
-        .footerButton {
-            cursor: pointer;
-            background: #20bd5f;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            width: 200px;
-            justify-content: center;
-            padding: 7px 10px;
-            border-radius: 20px;
-            border: none;
-            margin: 28px auto 0px auto;
-            transition: all 0.3s ease-in-out;
-
-            &:hover {
-                background: #13763b;
-            }
-
-            > span {
-                margin-left: 5px;
-                font-weight: bold;
-            }
+        &:hover {
+            background: #13763b;
         }
+
+        > span {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+    }
+
+    .footerButton:hover ~ .heroImage {
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        top: 6%;
+        opacity: 1;
     }
 }
 

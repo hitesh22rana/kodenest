@@ -9,8 +9,8 @@ const LogoutModal = ({ onClose, confirmLogout }) => {
                     <h2>Log out?</h2>
                     <span>Are you sure you want to log out?</span>
                     <div>
-                        <button onClick={onClose}>CANCEL</button>
-                        <button onClick={confirmLogout}>LOG OUT</button>
+                        <button onClick={onClose}>Cancel</button>
+                        <button onClick={confirmLogout}>Log Out</button>
                     </div>
                 </div>
             </div>
