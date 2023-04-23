@@ -19,7 +19,7 @@ const io = require('socket.io')(server, {
 app.use(cookieParser());
 const corsOption = {
     credentials: true,
-    origin: [process.env.FRONT_URL,],
+    origin: process.env.FRONT_URL,
 };
 
 app.use(cors(corsOption));
