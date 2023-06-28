@@ -1,3 +1,5 @@
-Dockerfile.*
-docker-compose.*
+node_modules
+Dockerfile.dev
+Dockerfile.prod
+Dockerfile
 .dockerignore

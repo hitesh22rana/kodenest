@@ -1,8 +1,0 @@
-{
-  "short_name": "Kodenest",
-  "name": "KodeNest is a voice chat platform for technocrats, where like-minded individuals can create rooms, engage in conversation, and share/express their ideas.",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}
