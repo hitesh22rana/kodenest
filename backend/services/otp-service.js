@@ -2,6 +2,8 @@ const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const hashService = require('./hash-service');
 
+require('dotenv').config();
+
 class OtpService {
     async generateOtp() {
         const otp = crypto.randomInt(100000, 999999);
@@ -20,15 +22,14 @@ class OtpService {
         return token
     }
 
-    sendByEmail(email, otp) {
+    async sendByEmail(email, otp) {
         const transporter = nodemailer.createTransport({
             service: "gmail",
+            host: "smtp.gmail.com",
+            secure: false,
             auth: {
                 user: process.env.EMAIL_USERNAME,
                 pass: process.env.EMAIL_PASSWORD,
-            },
-            tls: {
-                rejectUnauthorized: false,
             },
         });
 
@@ -49,11 +50,12 @@ class OtpService {
         `,
         }
 
-        return transporter.sendMail(mailOptions, function (err, info) {
-            if (err) {
-            } else {
-            }
-        });
+        try {
+            return await transporter.sendMail(mailOptions);
+        } catch (error) {
+            throw error;
+        }
+
     }
 
     sendResetPasswordByEmail(email, link) {

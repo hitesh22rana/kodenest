@@ -29,11 +29,10 @@ class AuthController {
 
         // Send OTP
         try {
-            otpService.sendByEmail(email, otp);
-            return res.status(200).json({
+            await otpService.sendByEmail(email, otp);
+            return res.status(201).json({
                 hash: `${hash}.${expires}`,
                 email,
-                otp,
             });
         } catch (err) {
             return res.status(500).json({ message: "Message sending failed!" });
@@ -81,11 +80,15 @@ class AuthController {
         await tokenService.storeRefreshToken(refreshToken, user._id);
 
         res.cookie('refreshToken', refreshToken, {
+            sameSite: "none",
+            secure: "true",
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
         });
 
         res.cookie('accessToken', accessToken, {
+            sameSite: "none",
+            secure: "true",
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
         });
@@ -99,7 +102,7 @@ class AuthController {
 
         let userData;
         try {
-            userData = await tokenService.verifyRefreshToken(
+            userData = tokenService.verifyRefreshToken(
                 refreshTokenFromCookie
             );
         } catch (err) {
@@ -135,11 +138,15 @@ class AuthController {
         }
 
         res.cookie('refreshToken', refreshToken, {
+            sameSite: "none",
+            secure: "true",
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
         });
 
         res.cookie('accessToken', accessToken, {
+            sameSite: "none",
+            secure: "true",
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
         });
@@ -179,18 +186,22 @@ class AuthController {
                     await tokenService.storeRefreshToken(refreshToken, user._id);
 
                     res.cookie('refreshToken', refreshToken, {
+                        sameSite: "none",
+                        secure: "true",
                         maxAge: 1000 * 60 * 60 * 24 * 30,
                         httpOnly: true,
                     });
                 }
 
                 res.cookie('accessToken', accessToken, {
+                    sameSite: "none",
+                    secure: "true",
                     maxAge: 1000 * 60 * 60 * 24 * 30,
                     httpOnly: true,
                 });
 
                 const userDto = new UserDto(user);
-                return res.status(201).json({ user: userDto, auth: true });
+                return res.status(200).json({ user: userDto, auth: true });
             } else {
                 const { accessToken, refreshToken } = tokenService.generateTokens({
                     _id: user._id,
@@ -201,18 +212,22 @@ class AuthController {
                     await tokenService.storeRefreshToken(refreshToken, user._id);
 
                     res.cookie('refreshToken', refreshToken, {
+                        sameSite: "none",
+                        secure: "true",
                         maxAge: 1000 * 60 * 60 * 24 * 30,
                         httpOnly: true,
                     });
                 }
 
                 res.cookie('accessToken', accessToken, {
+                    sameSite: "none",
+                    secure: "true",
                     maxAge: 1000 * 60 * 60 * 24 * 30,
                     httpOnly: true,
                 });
 
                 const userDto = new UserDto(user);
-                return res.status(201).json({ user: userDto, auth: true });
+                return res.status(200).json({ user: userDto, auth: true });
             }
 
 

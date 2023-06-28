@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
-const DBConnect = require('./database');
-const router = require('./routes');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const path = require('path')
+
+const router = require('./routes');
+const DBConnect = require('./database');
 const ACTIONS = require('./actions');
 
+const app = express();
 const server = require('http').createServer(app);
 
 const io = require('socket.io')(server, {
@@ -23,7 +25,7 @@ const corsOption = {
 };
 
 app.use(cors(corsOption));
-app.use('/storage', express.static('storage'));
+app.use('/storage', express.static(path.join(__dirname, 'storage')));
 
 const PORT = process.env.PORT || 5500;
 DBConnect();
